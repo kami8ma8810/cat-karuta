@@ -1,0 +1,11 @@
+{
+  "meta": {
+    "title": "Cat Encyclopedia Karuta",
+    "description": "A fun card game to learn cat breeds"
+  },
+  "home": {
+    "title": "Cat Encyclopedia Karuta", 
+    "start": "Start",
+    "developer": "Developer: Joo Kalubi"
+  }
+}

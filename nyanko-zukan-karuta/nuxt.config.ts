@@ -2,16 +2,9 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: [
-    '@nuxtjs/tailwindcss',
-    '@nuxtjs/i18n'
-  ],
+  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n', '@nuxt/ui'],
   i18n: {
-    defaultLocale: 'ja',
-    locales: [
-      {code: 'ja', file: 'ja.ts'},
-      {code: 'en', file: 'en.ts'},
-    ],
+    vueI18n: './i18n/i18n.config.ts'
   },
   app: {
     head: {
