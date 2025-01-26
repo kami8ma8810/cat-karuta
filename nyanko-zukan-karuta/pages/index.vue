@@ -1,8 +1,10 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
 useHead({
-  title: 'にゃんこ図鑑かるた',
+  title: t('meta.title'),
   meta: [
-    { name: 'description', content: '猫の品種を楽しく学べるカルタゲーム' }
+    { name: 'description', content: t('meta.description') }
   ]
 })
 
@@ -20,7 +22,7 @@ const bgImage = new URL('../assets/image/fv_illust.png', import.meta.url).href
     </div>
 
     <div class="text-center mb-12 relative">
-      <h1 class="text-4xl md:text-6xl font-bold mb-2 text-pink-800">にゃんこ図鑑かるた</h1>
+      <h1 class="text-4xl md:text-6xl font-bold mb-2 text-pink-800">{{ t('home.title') }}</h1>
     </div>
 
     <NuxtLink 
@@ -37,7 +39,7 @@ const bgImage = new URL('../assets/image/fv_illust.png', import.meta.url).href
         rel="noopener noreferrer" 
         class="text-sm underline text-pink-700 hover:text-pink-800 md:text-lg"
       >
-        開発者: 上かるび
+        {{ t('home.developer') }}
       </a>
     </div>
   </div>
