@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// メタ情報
 useHead({
   title: 'にゃんこ図鑑かるた',
   meta: [
@@ -7,13 +6,11 @@ useHead({
   ]
 })
 
-// 背景画像のインポート
-const bgImage = new URL('../assets/images/fv_illust.png', import.meta.url).href
+const bgImage = new URL('../assets/image/fv_illust.png', import.meta.url).href
 </script>
 
 <template>
   <div class="min-h-screen bg-gradient-to-b from-pink-50 to-green-50 flex flex-col items-center justify-center p-4 relative">
-    <!-- 背景画像 -->
     <div class="absolute inset-0 opacity-15 pointer-events-none">
       <div 
         class="w-full h-full bg-repeat bg-center" 
