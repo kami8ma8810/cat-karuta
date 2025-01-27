@@ -1,5 +1,7 @@
-
 <script setup lang="ts">
+import { useGameLogic } from '@/composables/useGameLogic'
+
+const { initialize, prepareNewRound } = useGameLogic()
 const { t } = useI18n()
 
 interface Card {
@@ -81,6 +83,11 @@ const handleCardSelect = (cardId: string) => {
     emit('select-card', cardId)
   }
 }
+
+onMounted(async () => {
+  await initialize()
+  prepareNewRound()
+})
 </script>
 
 <template>

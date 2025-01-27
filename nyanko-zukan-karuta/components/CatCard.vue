@@ -1,23 +1,35 @@
+<!-- components/CatCard.vue -->
 <template>
   <div 
-    class="relative aspect-square cursor-pointer transition-all duration-200"
+    class="relative aspect-square cursor-pointer transition-all duration-300"
     :class="{
-      'hover:scale-105': isSelectable,
-      'opacity-50': isRevealed && !isCorrect
+      'hover:scale-105': isSelectable && !isRevealed,
+      'opacity-80': !isSelectable || (isRevealed && !isCorrect)
     }"
     @click="handleClick"
   >
+    <!-- 画像ローディング表示 -->
+    <div 
+      v-if="isLoading"
+      class="absolute inset-0 bg-gray-100 rounded-lg flex items-center justify-center"
+    >
+      <div class="animate-spin rounded-full h-8 w-8 border-2 border-pink-500 border-t-transparent"></div>
+    </div>
+
+    <!-- 猫画像 -->
     <img 
       :src="imageUrl" 
       :alt="name"
+      @load="isLoading = false"
       class="w-full h-full object-cover rounded-lg shadow-md"
+      :class="{ 'opacity-0': isLoading }"
     />
     
     <!-- 結果表示オーバーレイ -->
     <div 
       v-if="isRevealed"
       :class="[
-        'absolute inset-0 flex items-center justify-center rounded-lg',
+        'absolute inset-0 flex items-center justify-center rounded-lg transition-opacity duration-300',
         isCorrect ? 'bg-green-500/50' : 'bg-red-500/50'
       ]"
     >
@@ -48,8 +60,10 @@ const emit = defineEmits<{
   select: []
 }>()
 
+const isLoading = ref(true)
+
 const handleClick = () => {
-  if (props.isSelectable) {
+  if (props.isSelectable && !props.isRevealed) {
     emit('select')
   }
 }
