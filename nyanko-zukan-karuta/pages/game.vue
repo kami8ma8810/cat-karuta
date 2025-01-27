@@ -11,7 +11,6 @@ interface Card {
   description: string
 }
 
-// 仮のカードデータ
 const cards = ref<Card[]>([
   {
     id: '1',
@@ -51,7 +50,6 @@ const cards = ref<Card[]>([
   }
 ])
 
-// Props
 const props = withDefaults(defineProps<{
   level: number
   playerScore: number
@@ -72,12 +70,10 @@ const props = withDefaults(defineProps<{
   currentMessage: ''
 })
 
-// Emits
 const emit = defineEmits<{
   'select-card': [cardId: string]
 }>()
 
-// Methods
 const handleCardSelect = (cardId: string) => {
   if (props.isSelectable) {
     emit('select-card', cardId)
@@ -92,7 +88,7 @@ onMounted(async () => {
 
 <template>
   <div class="min-h-screen bg-gradient-to-b from-pink-50 to-green-50 p-4">
-    <!-- スコアボード -->
+    <!-- score board -->
     <div class="flex justify-between items-center mb-8 max-w-4xl mx-auto">
       <div>
         <span class="text-xl font-bold text-pink-800">{{ t('game.level') }} {{ level }}</span>
@@ -112,7 +108,7 @@ onMounted(async () => {
       </div>
     </div>
 
-    <!-- 猫カードグリッド -->
+    <!-- cat card grid -->
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8 max-w-4xl mx-auto">
       <CatCard
         v-for="card in cards"
@@ -126,7 +122,7 @@ onMounted(async () => {
       />
     </div>
 
-    <!-- メッセージエリア -->
+    <!-- message area -->
     <div class="max-w-4xl mx-auto">
       <div class="bg-white/80 backdrop-blur-sm rounded-lg p-6 border border-pink-600 border-2">
         <div class="flex items-center gap-2 mb-2">
