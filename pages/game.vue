@@ -80,6 +80,13 @@ const handleCardSelect = (cardId: string) => {
   }
 }
 
+// ページを離れる前の確認
+// TODO: ブラウザを閉じるときにも出す
+onBeforeRouteLeave((to, from) => {
+  const answer = window.confirm('ゲームを中断します。保存されませんがよろしいですか？')
+  if (!answer) return false
+})
+
 onMounted(async () => {
   await initialize()
   prepareNewRound()
