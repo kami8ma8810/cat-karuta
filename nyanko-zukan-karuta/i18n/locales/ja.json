@@ -7,5 +7,15 @@
     "title": "にゃんこ図鑑かるた", 
     "start": "はじめる",
     "developer": "開発者: 上かるび"
+  },
+  "game": {
+    "player": "あなた",
+    "opponent": "相手",
+    "level": "レベル",
+    "score": "スコア",
+    "correct": "正解",
+    "incorrect": "不正解",
+    "waiting": "待機中...",
+    "reading": "読み上げ中..."
   }
 }

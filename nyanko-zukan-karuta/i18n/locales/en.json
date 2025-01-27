@@ -7,5 +7,15 @@
     "title": "Cat Encyclopedia Karuta", 
     "start": "Start",
     "developer": "Developer: Joo Kalubi"
+  },
+  "game": {
+    "player": "You",
+    "opponent": "Opponent",
+    "level": "Level",
+    "score": "Score",
+    "correct": "Correct",
+    "incorrect": "Incorrect",
+    "waiting": "Waiting...",
+    "reading": "Reading..."
   }
 }
