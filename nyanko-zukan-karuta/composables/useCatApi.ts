@@ -1,4 +1,4 @@
-import { catBreeds } from '@/assets/data/catBreads'
+import { catBreeds } from '~/assets/data/catBreeds'
 import type { 
   CatBreed, 
   CatBreedWithImage, 
