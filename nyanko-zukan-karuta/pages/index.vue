@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import backgroundImage from 'assets/image/fv_illust.png'
 // i18nの設定を取得
 const { t, locale } = useI18n()
 
@@ -8,8 +9,6 @@ useHead({
     { name: 'description', content: t('meta.description') }
   ]
 })
-
-const bgImage = new URL('../assets/image/fv_illust.png', import.meta.url).href
 
 // 言語切り替えメニューの状態管理
 const isLangMenuOpen = ref(false)
@@ -26,7 +25,7 @@ const toggleLanguage = () => {
     <div class="absolute inset-0 opacity-15 pointer-events-none">
       <div 
         class="w-full h-full bg-repeat bg-center" 
-        :style="{ backgroundImage: `url(${bgImage})`, backgroundSize:'contain' }"
+        :style="{ backgroundImage: `url(${backgroundImage})`, backgroundSize:'contain' }"
       >
       </div>
     </div>
