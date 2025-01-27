@@ -88,16 +88,19 @@ const handleCardSelect = (cardId: string) => {
     <!-- スコアボード -->
     <div class="flex justify-between items-center mb-8 max-w-4xl mx-auto">
       <div>
-        <span class="text-lg font-bold text-pink-800">{{ t('game.level') }} {{ level }}</span>
+        <span class="text-xl font-bold text-pink-800">{{ t('game.level') }} {{ level }}</span>
       </div>
       <div class="flex gap-8">
-        <div class="text-center">
-          <p class="text-sm text-pink-600">{{ t('game.player') }}</p>
-          <p class="text-2xl font-bold text-pink-800">{{ playerScore }}</p>
-        </div>
-        <div class="text-center">
-          <p class="text-sm text-pink-600">{{ t('game.opponent') }}</p>
-          <p class="text-2xl font-bold text-pink-800">{{ computerScore }}</p>
+        <div class="flex gap-8 items-center">
+          <p class="text-md font-bold text-pink-800">{{ t('game.score') }}</p>
+          <div class="text-center">
+            <p class="text-sm text-pink-600">{{ t('game.player') }}</p>
+            <p class="text-2xl font-bold text-pink-800">{{ playerScore }}</p>
+          </div>
+          <div class="text-center">
+            <p class="text-sm text-pink-600">{{ t('game.opponent') }}</p>
+            <p class="text-2xl font-bold text-pink-800">{{ computerScore }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -118,7 +121,7 @@ const handleCardSelect = (cardId: string) => {
 
     <!-- メッセージエリア -->
     <div class="max-w-4xl mx-auto">
-      <div class="bg-white/80 backdrop-blur-sm rounded-lg p-6">
+      <div class="bg-white/80 backdrop-blur-sm rounded-lg p-6 border border-pink-600 border-2">
         <div class="flex items-center gap-2 mb-2">
           <div 
             :class="[
