@@ -9,6 +9,7 @@ export const useGameLogic = () => {
   // 状態管理
   const { state: gameState, updateScore, updateStatus, updateLevel } = useGameState()
   const { fetchCatsWithImage } = useCatApi()
+  const router = useRouter()
 
   const allCat = ref<CatBreedWithImage[]>([])
   const usedCatIds = ref<Set<string>>(new Set())
@@ -101,6 +102,14 @@ export const useGameLogic = () => {
     prepareNewRound()
   }
 
+  // ゲームを中断してホームに戻る
+  const handleBack = () => {
+    const answer = window.confirm('ゲームを中断します。保存されませんがよろしいですか？')
+    if (answer) {
+      router.push('/')
+    }
+  }
+
   // クリーンアップ
   onUnmounted(() => {
     if (typingTimer) clearTimeout(typingTimer)
@@ -115,6 +124,7 @@ export const useGameLogic = () => {
     revealedCardId,
     correctCardId,
     initialize,
-    handleCardSelect
+    handleCardSelect,
+    handleBack
   }
 }

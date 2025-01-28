@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { useGameLogic } from '@/composables/useGameLogic'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 
 const { t } = useI18n()
+const router = useRouter()
 const {
   gameState,
   displayCat,
@@ -10,7 +12,8 @@ const {
   revealedCardId,
   correctCardId,
   initialize,
-  handleCardSelect
+  handleCardSelect,
+  handleBack
 } = useGameLogic()
 
 // ページを離れる前の確認
@@ -28,6 +31,15 @@ onMounted(async () => {
 
 <template>
   <div class="min-h-screen bg-gradient-to-b from-pink-50 to-green-50 p-4">
+    <!-- トップに戻るボタン -->
+    <button
+      @click="handleBack"
+      class="fixed top-4 left-4 flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm text-pink-800 hover:bg-pink-50 rounded-lg transition-colors shadow-sm"
+    >
+      <Icon name="i-heroicons-arrow-left" class="w-6 h-6" />
+      <span>{{ t('game.back') }}</span>
+    </button>
+
     <!-- スコアボード -->
     <div class="flex justify-between items-center mb-8 max-w-4xl mx-auto">
       <div>
