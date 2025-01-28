@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import backgroundImage from 'assets/image/fv_illust.png'
-// i18nの設定を取得
+import { useI18n } from 'vue-i18n'
+import { useCatData } from '@/composables/useCatData'
+
 const { t, locale } = useI18n()
+const { fetchData, isLoading, error } = useCatData()
 
 useHead({
   title: t('meta.title'),
@@ -18,6 +21,15 @@ const toggleLanguage = () => {
   locale.value = locale.value === 'ja' ? 'en' : 'ja'
   isLangMenuOpen.value = false
 }
+
+// トップページでデータを事前取得
+onMounted(async () => {
+  try {
+    await fetchData()
+  } catch (e) {
+    console.error('データの取得に失敗:', e)
+  }
+})
 </script>
 
 <template>
@@ -34,11 +46,22 @@ const toggleLanguage = () => {
       <h1 class="text-4xl md:text-6xl font-bold mb-2 text-pink-800">{{ t('home.title') }}</h1>
     </div>
 
+    <!-- ローディング表示 -->
+    <div v-if="isLoading" class="mb-8">
+      <p class="text-pink-800">{{ t('home.loading') }}</p>
+    </div>
+
+    <!-- エラー表示 -->
+    <div v-else-if="error" class="mb-8 text-red-600">
+      <p>{{ t('home.error') }}</p>
+    </div>
+
     <NuxtLink 
       to="/game"
       class="bg-pink-400 hover:bg-pink-500 text-white font-bold py-4 px-12 rounded-full text-xl md:text-3xl mb-8 transition-colors relative shadow-lg hover:shadow-xl"
+      :disabled="isLoading || !!error"
     >
-      {{ t('home.start') }}
+      {{ isLoading ? t('home.loading') : t('home.start') }}
     </NuxtLink>
 
     <div class="fixed bottom-8 text-center">

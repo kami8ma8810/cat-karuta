@@ -4,14 +4,15 @@ import { useComputerAnswer } from './game/useComputerAnswer'
 import { useGameState } from './game/useGameState'
 import type { CatBreedWithImage } from '@/types/cat'
 import { selectRandom } from '@/utils/randomSelect'
+import { useCatData } from '@/composables/useCatData'
 
 export const useGameLogic = () => {
   // 状態管理
   const { state: gameState, updateScore, updateStatus, updateLevel } = useGameState()
-  const { fetchCatsWithImage } = useCatApi()
+  const { catData } = useCatData()
   const router = useRouter()
 
-  const allCat = ref<CatBreedWithImage[]>([])
+  const allCat = computed(() => catData.value)
   const usedCatIds = ref<Set<string>>(new Set())
   const displayCat = ref<CatBreedWithImage[]>([])
   const currentCat = ref<CatBreedWithImage | null>(null)
@@ -98,7 +99,6 @@ export const useGameLogic = () => {
 
   // 初期化
   const initialize = async () => {
-    allCat.value = await fetchCatsWithImage()
     prepareNewRound()
   }
 
