@@ -46,8 +46,12 @@ export const useGameLogic = () => {
         index++
         typingTimer = setTimeout(type, typingSpeed.value)
       } else {
-        updateStatus('selecting')
-        startAnswerTimer()
+        updateStatus('answering')
+        // 少し待ってから回答可能に
+        setTimeout(() => {
+          updateStatus('selecting')
+          startAnswerTimer()
+        }, 500)
       }
     }
 

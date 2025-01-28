@@ -42,7 +42,7 @@
 
 <script setup lang="ts">
 interface Props {
-  imageUrl: string
+  imageUrl: string | null
   name: string
   isSelectable?: boolean
   isRevealed?: boolean

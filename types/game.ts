@@ -1,4 +1,4 @@
-export type GameStatus = 'waiting' | 'reading' | 'selecting' | 'showResult'
+export type GameStatus = 'waiting' | 'reading' | 'answering' | 'selecting' | 'showResult'
 
 export interface GameScore {
   player: number
