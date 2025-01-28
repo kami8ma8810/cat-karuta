@@ -1,53 +1,53 @@
 import { describe, it, expect, vi } from 'vitest'
-import { selectRandomCats } from '~/utils/randomSelect'
-import { mockCats } from '~/tests/__mocks__/catBreeds'
+import { selectRandomCat } from '~/utils/randomSelect'
+import { mockCat } from '~/tests/__mocks__/catBreed'
 
-describe('selectRandomCats', () => {
-  const mockGetRandomValues = vi.fn()
+describe('selectRandomCat', () => {
+  const mockGetRandomValue = vi.fn()
   global.crypto = {
-    getRandomValues: mockGetRandomValues
+    getRandomValues: mockGetRandomValue
   } as any
 
   it('指定された数の猫を返すこと', () => {
-    mockGetRandomValues.mockReturnValue(new Uint32Array([0]))
-    const result = selectRandomCats(mockCats, 2)
+    mockGetRandomValue.mockReturnValue(new Uint32Array([0]))
+    const result = selectRandomCat(mockCat, 2)
     expect(result).toHaveLength(2)
   })
 
   it('元の配列を変更しないこと', () => {
-    const originalCats = [...mockCats]
-    mockGetRandomValues.mockReturnValue(new Uint32Array([0]))
-    selectRandomCats(mockCats, 2)
-    expect(mockCats).toEqual(originalCats)
+    const originalCats = [...mockCat]
+    mockGetRandomValue.mockReturnValue(new Uint32Array([0]))
+    selectRandomCat(mockCat, 2)
+    expect(mockCat).toEqual(originalCats)
   })
 
   it('重複なく選択されること', () => {
-    mockGetRandomValues.mockReturnValue(new Uint32Array([0]))
-    const result = selectRandomCats(mockCats, 2)
+    mockGetRandomValue.mockReturnValue(new Uint32Array([0]))
+    const result = selectRandomCat(mockCat, 2)
     const uniqueIds = new Set(result.map(cat => cat.id))
     expect(uniqueIds.size).toBe(2)
   })
 
   it('要求数が配列長を超える場合、配列長分の要素を返すこと', () => {
-    mockGetRandomValues.mockReturnValue(new Uint32Array([0]))
-    const result = selectRandomCats(mockCats, 5)
-    expect(result).toHaveLength(mockCats.length)
+    mockGetRandomValue.mockReturnValue(new Uint32Array([0]))
+    const result = selectRandomCat(mockCat, 5)
+    expect(result).toHaveLength(mockCat.length)
   })
 
   it('ランダムな順序で返されること', () => {
-    mockGetRandomValues
+    mockGetRandomValue
       .mockReturnValueOnce(new Uint32Array([0]))
       .mockReturnValueOnce(new Uint32Array([2 ** 31]))
       .mockReturnValueOnce(new Uint32Array([2 ** 32 - 1]))
 
-    const result1 = selectRandomCats(mockCats, 3)
+    const result1 = selectRandomCat(mockCat, 3)
     
-    mockGetRandomValues
+    mockGetRandomValue
       .mockReturnValueOnce(new Uint32Array([2 ** 32 - 1]))
       .mockReturnValueOnce(new Uint32Array([2 ** 31]))
       .mockReturnValueOnce(new Uint32Array([0]))
 
-    const result2 = selectRandomCats(mockCats, 3)
+    const result2 = selectRandomCat(mockCat, 3)
 
     // 少なくとも1つの位置で異なる要素があることを確認
     const hasDifferentOrder = result1.some((cat, index) => cat.id !== result2[index].id)

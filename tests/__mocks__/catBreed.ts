@@ -1,6 +1,6 @@
 import type { CatBreed } from '~/types/cat'
 
-export const mockCats: CatBreed[] = [
+export const mockCat: CatBreed[] = [
   {
     id: 'abys',
     name: 'Abyssinian',

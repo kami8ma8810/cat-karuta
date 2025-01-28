@@ -1,4 +1,4 @@
-export const catBreeds = {
+export const catBreed = {
   'abys': {
     id: 'abys',
     nameJa: 'アビシニアン',

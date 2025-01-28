@@ -1,4 +1,3 @@
-<!-- components/CatCard.vue -->
 <template>
   <div 
     class="relative aspect-square cursor-pointer transition-all duration-300"

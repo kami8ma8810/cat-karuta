@@ -1,9 +1,9 @@
 import { describe, test, expect } from 'vitest'
-import { catBreeds } from '@/assets/data/catBreeds'
+import { catBreed } from '~/assets/data/catBreed'
 
-describe('catBreeds', () => {
+describe('catBreed', () => {
   test('必要なプロパティが存在する', () => {
-    const breed = catBreeds['beng']  // for example
+    const breed = catBreed['beng']  // for example
     expect(breed).toBeDefined()
     expect(breed).toHaveProperty('id')
     expect(breed).toHaveProperty('nameJa')
@@ -11,7 +11,7 @@ describe('catBreeds', () => {
   })
 
   test('すべての猫種にデータが正しく入力されている', () => {
-    for (const [id, breed] of Object.entries(catBreeds)) {
+    for (const [id, breed] of Object.entries(catBreed)) {
       expect(breed.id).toBe(id)
       expect(breed.nameJa).toBeTruthy()
       expect(breed.descriptionJa).toBeTruthy()

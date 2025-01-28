@@ -1,4 +1,4 @@
-import { catBreeds } from '~/assets/data/catBreeds'
+import { catBreed } from '@/assets/data/catBreed'
 import type { 
   CatBreed, 
   CatBreedWithImage, 
@@ -13,14 +13,14 @@ export const useCatApi = () => {
   const API_KEY = config.public.catApiKey
   const BASE_URL = 'https://api.thecatapi.com/v1'
 
-  const breedTranslations: Record<string, CatBreedTranslation> = catBreeds
+  const breedTranslation: Record<string, CatBreedTranslation> = catBreed
 
   const handleApiError = (error: unknown): never => {
     console.error('API Error:', error)
     throw error instanceof Error ? error : new Error('Unknown API error')
   }
 
-  const fetchBreeds = async (): Promise<CatBreed[]> => {
+  const fetchBreed = async (): Promise<CatBreed[]> => {
     try {
       const response = await fetch(`${BASE_URL}/breeds`, {
         headers: { 'x-api-key': API_KEY }
@@ -34,12 +34,12 @@ export const useCatApi = () => {
       const data = await response.json() as ApiBreed[]
 
       return data
-        .filter((breed: ApiBreed) => breedTranslations[breed.id])
+        .filter((breed: ApiBreed) => breedTranslation[breed.id])
         .map((breed: ApiBreed): CatBreed => ({
           id: breed.id,
           name: breed.name,
-          nameJa: breedTranslations[breed.id].nameJa,
-          description: breedTranslations[breed.id].descriptionJa,
+          nameJa: breedTranslation[breed.id].nameJa,
+          description: breedTranslation[breed.id].descriptionJa,
           imageId: breed.reference_image_id
         }))
     } catch (error) {
@@ -68,9 +68,9 @@ export const useCatApi = () => {
     }
   }
 
-  const fetchCatsWithImages = async (): Promise<CatBreedWithImage[]> => {
+  const fetchCatsWithImage = async (): Promise<CatBreedWithImage[]> => {
     try {
-      const breeds = await fetchBreeds()
+      const breeds = await fetchBreed()
       const breedsWithImages = await Promise.all(
         breeds.map(async (breed: CatBreed): Promise<CatBreedWithImage> => {
           const imageUrl = await fetchBreedImage(breed.imageId)
@@ -87,8 +87,8 @@ export const useCatApi = () => {
   }
 
   return {
-    fetchBreeds,
+    fetchBreed,
     fetchBreedImage,
-    fetchCatsWithImages
+    fetchCatsWithImage
   }
 }
