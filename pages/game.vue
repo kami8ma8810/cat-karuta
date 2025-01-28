@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useGameLogic } from '@/composables/useGameLogic'
 
-const { initialize, prepareNewRound } = useGameLogic()
+const { initialize } = useGameLogic()
 const { t } = useI18n()
 
 interface Card {
@@ -89,7 +89,6 @@ onBeforeRouteLeave((to, from) => {
 
 onMounted(async () => {
   await initialize()
-  prepareNewRound()
 })
 </script>
 
