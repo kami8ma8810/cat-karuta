@@ -19,7 +19,7 @@ export const useGameLogic = () => {
   const correctCardId = ref<string | null>(null)
 
   // タイピングアニメーション用
-  const typingSpeed = computed(() => Math.max(50 - gameState.value.level * 3, 20))
+  const typingSpeed = computed(() => Math.max(150 - gameState.value.level * 5, 80))
   let typingTimer: NodeJS.Timeout | undefined
 
   // プレイヤーとコンピュータの回答処理
@@ -38,20 +38,18 @@ export const useGameLogic = () => {
   const typeMessage = (message: string) => {
     let index = 0
     currentMessage.value = ''
-    updateStatus('reading')
+    // 読み上げ開始と同時に選択可能に
+    updateStatus('selecting')
+    startAnswerTimer()
+
+    // 説明文と猫種名を組み合わせる（改行を追加）
+    const fullMessage = `${message}\n\nこの猫は「${currentCat.value?.nameJa}」です。`
 
     const type = () => {
-      if (index < message.length) {
-        currentMessage.value += message[index]
+      if (index < fullMessage.length) {
+        currentMessage.value += fullMessage[index]
         index++
         typingTimer = setTimeout(type, typingSpeed.value)
-      } else {
-        updateStatus('answering')
-        // 少し待ってから回答可能に
-        setTimeout(() => {
-          updateStatus('selecting')
-          startAnswerTimer()
-        }, 500)
       }
     }
 
