@@ -25,13 +25,13 @@ export default defineEventHandler(async (event) => {
       url: uploadedUrl,
       message: 'アップロード成功！'
     }
-  } catch (error) {
+  } catch (error: unknown) {
     // エラー詳細をログに出力
     console.error('Upload test error details:', error)
 
     throw createError({
       statusCode: 500,
-      message: `アップロードテストに失敗: ${error.message}`
+      message: `アップロードテストに失敗: ${error instanceof Error ? error.message : '不明なエラー'}`
     })
   }
 }) 
