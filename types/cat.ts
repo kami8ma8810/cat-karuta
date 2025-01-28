@@ -1,4 +1,3 @@
-// API レスポンス関連の型定義
 export interface ApiError {
   status: number;
   message: string;
@@ -17,7 +16,6 @@ export interface ApiImage {
   height: number;
 }
 
-// 猫種データの基本型定義
 export interface CatBreedTranslation {
   id: string;
   nameJa: string;
@@ -32,7 +30,6 @@ export interface CatBreed {
   imageId: string;
 }
 
-// 拡張された猫種データ型定義
 export interface CatBreedWithImage extends CatBreed {
   imageUrl: string | null;
 }
