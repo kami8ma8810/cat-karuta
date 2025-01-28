@@ -47,20 +47,48 @@ export const useCatApi = () => {
     }
   }
 
+  const fetchWithRetry = async (url: string, retries = 3, delay = 1000): Promise<Response> => {
+    const options: RequestInit = {
+      headers: { 
+        'x-api-key': API_KEY,
+      },
+      mode: 'cors',
+      credentials: 'omit'
+    }
+
+    try {
+      const response = await fetch(url, options)
+      
+      if (response.status === 429 && retries > 0) {
+        const retryAfter = response.headers.get('Retry-After')
+        const waitTime = retryAfter ? parseInt(retryAfter) * 1000 : delay
+        
+        await new Promise(resolve => setTimeout(resolve, waitTime))
+        return fetchWithRetry(url, retries - 1, delay * 2)
+      }
+      
+      return response
+    } catch (error) {
+      if (retries > 0) {
+        await new Promise(resolve => setTimeout(resolve, delay))
+        return fetchWithRetry(url, retries - 1, delay * 2)
+      }
+      throw error
+    }
+  }
+
   const fetchBreedImage = async (imageId: string): Promise<string | null> => {
     if (!imageId) return null
 
     try {
-      const response = await fetch(`${BASE_URL}/images/${imageId}`, {
-        headers: { 'x-api-key': API_KEY }
-      })
-
+      const response = await fetch(`/api/images/${imageId}`)
+      
       if (!response.ok) {
-        const error = await response.json() as ApiError
-        throw new Error(error.message)
+        console.error(`Image fetch failed: ${response.status}`)
+        return null
       }
 
-      const data = await response.json() as ApiImage
+      const data = await response.json()
       return data.url
     } catch (error) {
       console.error('Error fetching breed image:', error)
