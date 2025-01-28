@@ -1,8 +1,17 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
 export default defineNuxtConfig({
   runtimeConfig: {
+    cloudinary: {
+      cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+      apiKey: process.env.CLOUDINARY_API_KEY,
+      apiSecret: process.env.CLOUDINARY_API_SECRET
+    },
+    catApiKey: process.env.CAT_API_KEY,
     public: {
-      catApiKey: process.env.CAT_API_KEY
+      cloudinary: {
+        cloudName: process.env.CLOUDINARY_CLOUD_NAME
+      }
     }
   },
   compatibilityDate: '2024-11-01',
