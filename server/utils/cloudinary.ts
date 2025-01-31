@@ -14,11 +14,11 @@ export const initCloudinary = () => {
     api_secret: config.cloudinary.apiSecret
   }
   
-  console.log('Cloudinary Config:', {
-    cloud_name: cloudinaryConfig.cloud_name,
-    has_api_key: !!cloudinaryConfig.api_key,
-    has_api_secret: !!cloudinaryConfig.api_secret
-  })
+  // console.log('Cloudinary Config:', {
+  //   cloud_name: cloudinaryConfig.cloud_name,
+  //   has_api_key: !!cloudinaryConfig.api_key,
+  //   has_api_secret: !!cloudinaryConfig.api_secret
+  // })
   
   cloudinary.config(cloudinaryConfig)
 }
@@ -26,7 +26,7 @@ export const initCloudinary = () => {
 export const uploadImage = async (imageUrl: string, publicId: string) => {
   try {
     initCloudinary()
-    console.log('Uploading image:', { imageUrl, publicId })
+    // console.log('Uploading image:', { imageUrl, publicId })
     
     const result = await cloudinary.uploader.upload(imageUrl, {
       public_id: `cat-karuta/${publicId}`,
@@ -34,7 +34,7 @@ export const uploadImage = async (imageUrl: string, publicId: string) => {
       overwrite: false // 既存の画像は上書きしない
     })
     
-    console.log('Upload result:', result)
+    // console.log('Upload result:', result)
     return result.secure_url
   } catch (error) {
     console.error('Cloudinary upload error:', error)

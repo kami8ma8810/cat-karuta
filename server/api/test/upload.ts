@@ -4,15 +4,15 @@ export default defineEventHandler(async (event) => {
   try {
     // 設定値の確認
     const config = useRuntimeConfig()
-    console.log('Runtime config:', {
-      cloudName: config.cloudinary.cloudName,
-      hasApiKey: !!config.cloudinary.apiKey,
-      hasApiSecret: !!config.cloudinary.apiSecret
-    })
+    // console.log('Runtime config:', {
+    //   cloudName: config.cloudinary.cloudName,
+    //   hasApiKey: !!config.cloudinary.apiKey,
+    //   hasApiSecret: !!config.cloudinary.apiSecret
+    // })
 
     // より信頼性の高いテスト画像URL
     const testImageUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png'
-    console.log('Starting upload test with:', testImageUrl)
+    // console.log('Starting upload test with:', testImageUrl)
     
     const uploadedUrl = await uploadImage(testImageUrl, 'test-cat-001')
     
