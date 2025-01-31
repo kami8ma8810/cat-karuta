@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useGameLogic } from '@/composables/useGameLogic'
 import { useI18n } from 'vue-i18n'
-import { useRouter } from 'vue-router'
+// import { useRouter } from 'vue-router'
 
 const { t } = useI18n()
-const router = useRouter()
+// const router = useRouter()
 const {
   gameState,
   displayCat,
@@ -18,10 +18,10 @@ const {
 
 // ページを離れる前の確認
 // TODO: ブラウザを閉じるときにも出す
-onBeforeRouteLeave((to, from) => {
-  const answer = window.confirm('ゲームを中断します。保存されませんがよろしいですか？')
-  if (!answer) return false
-})
+// onBeforeRouteLeave((to, from) => {
+//   const answer = window.confirm('ゲームを中断します。保存されませんがよろしいですか？')
+//   if (!answer) return false
+// })
 
 // ゲーム開始時の初期化
 onMounted(async () => {
@@ -34,19 +34,19 @@ onMounted(async () => {
     <!-- トップに戻るボタン -->
     <button
       @click="handleBack"
-      class="fixed top-4 left-4 flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm text-pink-800 hover:bg-pink-50 rounded-lg transition-colors shadow-sm"
+      class="fixed top-4 left-4 flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm text-pink-800 hover:bg-pink-50 rounded-lg transition-colors shadow-md"
     >
       <Icon name="i-heroicons-arrow-left" class="w-6 h-6" />
       <span>{{ t('game.back') }}</span>
     </button>
 
     <!-- スコアボード -->
-    <div class="flex justify-between items-center mb-8 max-w-4xl mx-auto">
-      <div>
+    <div class="fixed left-4 top-20 bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-md">
+      <div class="mb-4">
         <span class="text-xl font-bold text-pink-800">{{ t('game.level') }} {{ gameState.level }}</span>
       </div>
-      <div class="flex gap-8">
-        <div class="flex gap-8 items-center">
+      <div class="flex flex-col gap-4">
+        <div class="flex gap-4">
           <p class="text-md font-bold text-pink-800">{{ t('game.score') }}</p>
           <div class="text-center">
             <p class="text-sm text-pink-600">{{ t('game.player') }}</p>
