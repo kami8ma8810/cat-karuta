@@ -68,7 +68,8 @@ watch(isSelectable, (newState) => {
         @click="() => {
           gameState.level = 9;
           gameState.score.player = 45;
-          handleCardSelect(displayCat[0]?.id || '');
+          gameState.status = 'gameCleared';
+          handleCardSelect(correctCardId || '');
         }"
         class="px-4 py-2 bg-gray-800 text-white rounded-lg opacity-50 hover:opacity-100"
       >

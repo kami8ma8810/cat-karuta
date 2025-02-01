@@ -36,6 +36,12 @@
     "tip3": "From level 4, opponent gets points on timeout.",
     "tip4": "Level 10 is the maximum level.",
     "tip5": "Wrong answers don't give points to opponent.",
-    "understood": "Got it!"
+    "understood": "Got it!",
+    "master": {
+      "title": "Cat Breed Master Achieved!",
+      "message": "Congratulations!\nYou are a cat breed expert!",
+      "restart": "Play again",
+      "back": "Back to Top"
+    }
   }
 }
