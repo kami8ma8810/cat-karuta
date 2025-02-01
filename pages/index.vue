@@ -2,6 +2,7 @@
 import backgroundImage from 'assets/image/fv_illust.png'
 import { useI18n } from 'vue-i18n'
 import { useCatData } from '@/composables/useCatData'
+import GameRules from '@/components/GameRules.vue'
 
 const { t, locale } = useI18n()
 const { fetchData, isLoading, error } = useCatData()
@@ -30,10 +31,21 @@ onMounted(async () => {
     console.error('データの取得に失敗:', e)
   }
 })
+
+const showRules = ref(false)
 </script>
 
 <template>
   <div class="min-h-screen bg-gradient-to-b from-pink-50 to-green-50 flex flex-col items-center justify-center p-4 relative">
+    <!-- ルール説明モーダル -->
+    <div
+      v-if="showRules"
+      class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
+      @click.self="showRules = false"
+    >
+      <GameRules @close="showRules = false" />
+    </div>
+
     <div class="absolute inset-0 opacity-15 pointer-events-none">
       <div 
         class="w-full h-full bg-repeat bg-center" 
@@ -42,23 +54,30 @@ onMounted(async () => {
       </div>
     </div>
 
-    <div class="text-center mb-12 relative">
-      <h1 class="text-4xl md:text-6xl font-bold mb-2 text-pink-800">{{ t('home.title') }}</h1>
+    <div class="relative z-10 text-center">
+      <h1 class="text-4xl font-bold text-pink-800 mb-8">{{ t('home.title') }}</h1>
+      
+      <div class="space-y-4">
+        <NuxtLink
+          to="/game"
+          class="block px-8 py-4 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors text-xl font-bold shadow-lg"
+        >
+          {{ t('home.start') }}
+        </NuxtLink>
+
+        <button
+          @click="showRules = true"
+          class="block w-full px-8 py-4 bg-white/80 backdrop-blur-sm text-pink-800 rounded-lg hover:bg-pink-50 transition-colors text-xl font-bold shadow-lg"
+        >
+          {{ t('home.rules') }}
+        </button>
+      </div>
     </div>
 
     <!-- エラー表示 -->
     <div v-if="error" class="mb-8 text-red-600">
       <p>{{ t('home.error') }}</p>
     </div>
-
-    <NuxtLink 
-      to="/game"
-      class="bg-pink-400 hover:bg-pink-500 text-white font-bold py-4 px-12 rounded-full text-xl md:text-3xl mb-8 transition-colors relative shadow-lg hover:shadow-xl"
-      :class="{ 'opacity-50 cursor-not-allowed': isLoading || !!error }"
-      :disabled="isLoading || !!error"
-    >
-      {{ isLoading ? t('home.loading') : t('home.start') }}
-    </NuxtLink>
 
     <div class="fixed bottom-8 text-center">
       <a 
