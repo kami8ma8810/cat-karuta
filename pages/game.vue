@@ -106,6 +106,7 @@ watch(isSelectable, (newState) => {
         :is-correct="revealedCardId === cat.id && cat.id === correctCardId"
         :is-answer="cat.id === correctCardId"
         :reveal-type="revealType"
+        :game-status="gameState.status"
         @select="handleCardSelect(cat.id)"
       />
     </div>

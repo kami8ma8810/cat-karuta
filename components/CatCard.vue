@@ -23,16 +23,26 @@
       class="w-full h-full object-cover rounded-lg shadow-md"
     />
 
+    <!-- 猫種名表示オーバーレイ -->
+    <div
+      v-if="showBreedName"
+      class="absolute z-10 inset-0 flex items-end justify-center"
+    >
+      <div class="text-center p-2 w-full bg-black rounded-lg">
+        <p class="text-sm font-bold text-white">{{ name }}</p>
+      </div>
+    </div>
+
     <!-- 結果表示オーバーレイ -->
     <div
       v-if="isRevealed || isAnswer"
       :class="[
         'absolute inset-0 flex items-center justify-center rounded-lg',
         isCorrect
-          ? 'bg-green-500/50'
+          ? 'bg-green-500/40'
           : isAnswer
-          ? 'bg-green-500/50'
-          : 'bg-red-500/50',
+          ? 'bg-green-500/40'
+          : 'bg-red-500/40',
       ]"
     >
       <Icon
@@ -43,7 +53,7 @@
             ? 'heroicons:check-circle'
             : 'heroicons:x-circle'
         "
-        class="w-16 h-16 text-white"
+        class="w-16 h-16 text-white z-10"
       />
     </div>
   </div>
@@ -58,6 +68,7 @@ interface Props {
   isCorrect?: boolean;
   isAnswer: boolean;
   revealType?: "mistake" | "timeup" | null;
+  gameStatus?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -66,7 +77,10 @@ const props = withDefaults(defineProps<Props>(), {
   isCorrect: false,
   isAnswer: false,
   revealType: null,
+  gameStatus: '',
 });
+
+const showBreedName = computed(() => props.gameStatus === 'waitingNext');
 
 const emit = defineEmits<{
   select: [];
