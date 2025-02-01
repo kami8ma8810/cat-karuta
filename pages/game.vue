@@ -2,8 +2,11 @@
 import { useGameLogic } from '@/composables/useGameLogic'
 import { useI18n } from 'vue-i18n'
 import { useCatData } from '@/composables/useCatData'
-import { MasterAchievement } from '@/components/MasterAchievement'
+import MasterAchievement from '@/components/MasterAchievement.vue'
+// import { useRuntimeConfig } from 'nuxt'
 // import { useRouter } from 'vue-router'
+
+const isDev = process.env.NODE_ENV === 'development'
 
 const { t } = useI18n()
 // const router = useRouter()
@@ -59,6 +62,20 @@ watch(isSelectable, (newState) => {
 
 <template>
   <div class="min-h-screen bg-gradient-to-b from-pink-50 to-green-50 p-4">
+    <!-- デバッグメニュー（開発環境のみ） -->
+    <div v-if="isDev" class="fixed top-4 right-4 z-50">
+      <button
+        @click="() => {
+          gameState.level = 9;
+          gameState.score.player = 45;
+          handleCardSelect(displayCat[0]?.id || '');
+        }"
+        class="px-4 py-2 bg-gray-800 text-white rounded-lg opacity-50 hover:opacity-100"
+      >
+        デバッグ: ゲームクリア
+      </button>
+    </div>
+
     <!-- トップに戻るボタン -->
     <button
       @click="handleBack"

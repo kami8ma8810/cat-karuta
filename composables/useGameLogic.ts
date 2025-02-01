@@ -157,6 +157,15 @@ export const useGameLogic = () => {
     }
   }
 
+  // ゲームをリスタート
+  const handleRestart = () => {
+    gameState.value.score.player = 0
+    gameState.value.score.computer = 0
+    gameState.value.level = 1
+    usedCatIds.value.clear()
+    prepareNewRound()
+  }
+
   // クリーンアップ
   onUnmounted(() => {
     if (typingTimer) clearTimeout(typingTimer)
@@ -174,6 +183,7 @@ export const useGameLogic = () => {
     initialize,
     handleCardSelect,
     handleBack,
-    handleNext
+    handleNext,
+    handleRestart
   }
 }
