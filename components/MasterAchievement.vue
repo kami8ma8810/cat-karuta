@@ -9,6 +9,18 @@
       
       <p class="text-gray-700 whitespace-pre-line mb-8">{{ t('rules.master.message') }}</p>
 
+      <!-- SNSシェアボタン -->
+      <div class="flex justify-center gap-4 mb-8">
+        <a
+          :href="`https://twitter.com/intent/tweet?text=${encodeURIComponent(t('rules.master.shareText'))}&url=${encodeURIComponent(baseUrl)}&hashtags=にゃんこ図鑑かるた`"
+          target="_blank"
+          class="flex items-center gap-2 px-4 py-2 bg-black text-white rounded-lg hover:opacity-90 transition-opacity"
+        >
+          <Icon name="simple-icons:x" class="w-5 h-5" />
+          {{ t('rules.master.share') }}
+        </a>
+      </div>
+
       <div class="space-y-4">
         <button
           @click="$emit('restart')"
@@ -30,8 +42,10 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { useRequestURL } from '#app'
 
 const { t } = useI18n()
+const baseUrl = useRequestURL().origin
 
 defineEmits<{
   (e: 'restart'): void

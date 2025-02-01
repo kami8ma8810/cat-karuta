@@ -3,8 +3,10 @@ import backgroundImage from 'assets/image/fv_illust.png'
 import { useI18n } from 'vue-i18n'
 import { useCatData } from '@/composables/useCatData'
 import GameRules from '@/components/GameRules.vue'
+import { useRequestURL } from '#app'
 
 const { t, locale } = useI18n()
+const baseUrl = useRequestURL().origin
 const { fetchData, isLoading, error } = useCatData()
 
 useHead({
@@ -71,6 +73,16 @@ const showRules = ref(false)
         >
           {{ t('home.rules') }}
         </button>
+
+        <!-- SNSシェアボタン -->
+        <a
+          :href="`https://twitter.com/intent/tweet?text=${encodeURIComponent(t('home.shareText'))}&url=${encodeURIComponent(baseUrl)}&hashtags=にゃんこ図鑑かるた`"
+          target="_blank"
+          class="flex items-center justify-center gap-2 px-8 py-4 bg-black text-white rounded-lg hover:opacity-90 transition-opacity text-xl font-bold shadow-lg"
+        >
+          <Icon name="simple-icons:x" class="w-6 h-6" />
+          {{ t('home.share') }}
+        </a>
       </div>
     </div>
 

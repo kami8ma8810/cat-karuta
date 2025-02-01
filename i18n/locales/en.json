@@ -40,6 +40,8 @@
     "master": {
       "title": "Cat Breed Master Achieved!",
       "message": "Congratulations!\nYou are a cat breed expert!",
+      "shareText": "I've achieved the Cat Breed Master in the Cat Encyclopedia Karuta!",
+      "share": "Share",
       "restart": "Play again",
       "back": "Back to Top"
     }
