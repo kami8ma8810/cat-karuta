@@ -13,6 +13,7 @@ const {
   currentMessage,
   revealedCardId,
   correctCardId,
+  revealType,
   initialize,
   handleCardSelect,
   handleBack,
@@ -104,6 +105,7 @@ watch(isSelectable, (newState) => {
         :is-revealed="revealedCardId === cat.id"
         :is-correct="revealedCardId === cat.id && cat.id === correctCardId"
         :is-answer="cat.id === correctCardId"
+        :reveal-type="revealType"
         @select="handleCardSelect(cat.id)"
       />
     </div>

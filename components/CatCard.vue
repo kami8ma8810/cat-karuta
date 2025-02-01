@@ -1,40 +1,48 @@
 <template>
-  <div 
-    class="relative aspect-square cursor-pointer transition-all duration-300"
+  <div
+    class="relative aspect-square transition-all duration-300"
     :class="{
-      'hover:scale-105': isSelectable && !isRevealed,
-      'opacity-80': !isSelectable || (isRevealed && !isCorrect && !isAnswer),
-      'ring-4 ring-green-500 ring-offset-2': isAnswer
-    }"
+      'cursor-pointer': isSelectable && !isRevealed && !isAnswer}"
     @click="handleClick"
   >
     <!-- 画像ローディング表示 -->
-    <div 
+    <div
       v-if="isLoading"
       class="absolute inset-0 bg-gray-100 rounded-lg flex items-center justify-center"
     >
-      <div class="animate-spin rounded-full h-8 w-8 border-2 border-pink-500 border-t-transparent"></div>
+      <div
+        class="animate-spin rounded-full h-8 w-8 border-2 border-pink-500 border-t-transparent"
+      ></div>
     </div>
 
     <!-- 猫画像 -->
-    <img 
+    <img
       :src="imageUrl || ''"
       :alt="name"
       @load="isLoading = false"
       class="w-full h-full object-cover rounded-lg shadow-md"
-      :class="{ 'opacity-0': isLoading }"
     />
-    
+
     <!-- 結果表示オーバーレイ -->
-    <div 
-      v-if="isRevealed"
+    <div
+      v-if="isRevealed || isAnswer"
       :class="[
-        'absolute inset-0 flex items-center justify-center rounded-lg transition-opacity duration-300',
-        isCorrect ? 'bg-green-500/50' : isAnswer ? 'bg-pink-500/50' : 'bg-red-500/50'
+        'absolute inset-0 flex items-center justify-center rounded-lg',
+        isCorrect
+          ? 'bg-green-500/50'
+          : isAnswer
+          ? 'bg-green-500/50'
+          : 'bg-red-500/50',
       ]"
     >
-      <Icon 
-        :name="isCorrect ? 'heroicons:check-circle' : isAnswer ? 'heroicons:sparkles' : 'heroicons:x-circle'"
+      <Icon
+        :name="
+          isCorrect
+            ? 'heroicons:check-circle'
+            : isAnswer
+            ? 'heroicons:check-circle'
+            : 'heroicons:x-circle'
+        "
         class="w-16 h-16 text-white"
       />
     </div>
@@ -43,32 +51,33 @@
 
 <script setup lang="ts">
 interface Props {
-  imageUrl: string | null
-  name: string
-  isSelectable?: boolean
-  isRevealed?: boolean
-  isCorrect?: boolean
-  isAnswer: boolean
+  imageUrl: string | null;
+  name: string;
+  isSelectable?: boolean;
+  isRevealed?: boolean;
+  isCorrect?: boolean;
+  isAnswer: boolean;
+  revealType?: "mistake" | "timeup" | null;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   isSelectable: true,
   isRevealed: false,
   isCorrect: false,
-  isAnswer: false
-})
+  isAnswer: false,
+  revealType: null,
+});
 
 const emit = defineEmits<{
-  select: []
-}>()
+  select: [];
+}>();
 
-const isLoading = ref(true)
+const isLoading = ref(true);
 
 const handleClick = () => {
-  console.log('props.isSelectable', props.isSelectable)
-  console.log('props.isRevealed', props.isRevealed)
-  if (props.isSelectable && !props.isRevealed) {
-    emit('select')
+  // 正解表示後やカード表示後はクリックを無効化
+  if (props.isSelectable && !props.isRevealed && !props.isAnswer) {
+    emit("select");
   }
-}
+};
 </script>

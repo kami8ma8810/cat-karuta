@@ -19,6 +19,7 @@ export const useGameLogic = () => {
   const currentMessage = ref('')
   const revealedCardId = ref<string | null>(null)
   const correctCardId = ref<string | null>(null)
+  const revealType = ref<RevealType>(null)
 
   // タイピングアニメーション用
   const typingSpeed = computed(() => Math.max(150 - gameState.value.level * 5, 80))
@@ -40,6 +41,8 @@ export const useGameLogic = () => {
   onComputerAnswer(() => {
     // 正解のカードを表示
     correctCardId.value = currentCat.value?.id || null
+    revealedCardId.value = currentCat.value?.id || null
+    revealType.value = 'timeup'
     // お手つき後と同様に待機状態に移行
     updateStatus('waitingNext')
   })
@@ -80,6 +83,7 @@ export const useGameLogic = () => {
     // 状態をリセット
     revealedCardId.value = null
     correctCardId.value = null
+    revealType.value = null
     currentMessage.value = ''
 
     // タイピング開始
@@ -96,6 +100,7 @@ export const useGameLogic = () => {
     cancelAnswerTimer()
     revealedCardId.value = cardId
     correctCardId.value = currentCat.value?.id || null
+    revealType.value = 'mistake'
 
     const isCorrect = handleAnswer(selectedCat)
     if (isCorrect && gameState.value.score.player % 5 === 0) {
@@ -146,6 +151,7 @@ export const useGameLogic = () => {
     currentMessage,
     revealedCardId,
     correctCardId,
+    revealType,
     initialize,
     handleCardSelect,
     handleBack,
