@@ -114,31 +114,8 @@ watch(isSelectable, (newState) => {
     <!-- メッセージエリア -->
     <div class="max-w-4xl mx-auto">
       <div 
-        class="bg-white/80 backdrop-blur-sm rounded-lg p-6 border-2"
-        :class="[
-          ['reading', 'answering'].includes(gameState.status)
-            ? 'border-pink-600 shadow-lg shadow-pink-100' 
-            : 'border-gray-200'
-        ]"
+        class="bg-white backdrop-blur-sm rounded-lg p-6 border-2"
       >
-        <!-- ステータスインジケーター -->
-        <div class="flex items-center gap-2 mb-4">
-          <div 
-            :class="[
-              'w-4 h-4 rounded-full transition-colors duration-300',
-              gameState.status === 'reading' ? 'bg-pink-500 animate-pulse' 
-              : gameState.status === 'answering' ? 'bg-yellow-500 animate-pulse'
-              : 'bg-gray-300'
-            ]"
-          ></div>
-          <span 
-            v-if="!['reading', 'answering'].includes(gameState.status)"
-            class="text-lg transition-colors duration-300 text-gray-600"
-          >
-            {{ t('game.waiting') }}
-          </span>
-        </div>
-
         <!-- タイピングテキスト -->
         <p 
           class="text-xl min-h-[4rem] relative font-medium"
