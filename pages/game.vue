@@ -2,6 +2,7 @@
 import { useGameLogic } from '@/composables/useGameLogic'
 import { useI18n } from 'vue-i18n'
 import { useCatData } from '@/composables/useCatData'
+import { MasterAchievement } from '@/components/MasterAchievement'
 // import { useRouter } from 'vue-router'
 
 const { t } = useI18n()
@@ -17,7 +18,8 @@ const {
   initialize,
   handleCardSelect,
   handleBack,
-  handleNext
+  handleNext,
+  handleRestart
 } = useGameLogic()
 
 const isSelectable = computed(() => gameState.value.status === 'selecting')
@@ -130,6 +132,13 @@ watch(isSelectable, (newState) => {
         </p>
       </div>
     </div>
+
+    <!-- マスター達成モーダル -->
+    <MasterAchievement
+      v-if="gameState.status === 'gameCleared'"
+      @restart="handleRestart"
+      @back="handleBack"
+    />
   </div>
 </template>
 

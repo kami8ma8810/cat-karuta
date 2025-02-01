@@ -104,7 +104,26 @@ export const useGameLogic = () => {
 
     const isCorrect = handleAnswer(selectedCat)
     if (isCorrect && gameState.value.score.player % 5 === 0) {
+      // レベル10達成時の処理
+      if (gameState.value.level === 9) {
+        updateLevel(10)
+        updateStatus('gameCleared')
+        return
+      }
       updateLevel(Math.min(gameState.value.level + 1, 10))
+    }
+
+    // ゲームオーバーチェック
+    if (gameState.value.score.computer >= 3) {
+      // 2秒後にゲームをリセット
+      setTimeout(() => {
+        gameState.value.score.player = 0
+        gameState.value.score.computer = 0
+        gameState.value.level = 1
+        usedCatIds.value.clear()
+        prepareNewRound()
+      }, 2000)
+      return
     }
 
     // 読み上げ中のタイマーをクリア

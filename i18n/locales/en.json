@@ -4,17 +4,38 @@
     "description": "A fun card game to learn cat breeds"
   },
   "home": {
-    "title": "Cat Encyclopedia Karuta", 
-    "start": "Start",
+    "title": "Cat Encyclopedia Karuta",
+    "start": "Start", 
+    "rules": "How to Play",
+    "loading": "Loading data...",
+    "error": "Failed to load data",
     "developer": "Developer: Joo Kalubi"
   },
   "game": {
     "player": "You",
-    "opponent": "Opponent",
+    "opponent": "Opponent", 
     "level": "Level",
     "score": "Score",
     "correct": "Correct",
     "incorrect": "Incorrect",
-    "waiting": "Waiting..."
+    "waiting": "Waiting...",
+    "back": "Back to Top",
+    "confirmBack": "Do you want to quit the game and go back?",
+    "next": "Next Question"
+  },
+  "rules": {
+    "title": "How to Play",
+    "step1": "A cat description will be read aloud.",
+    "step2": "Click on the cat photo that matches the description.",
+    "step3": "You get 1 point for a correct answer.",
+    "step4": "You can answer while the description is being read.",
+    "step5": "Game over when opponent gets 3 points.",
+    "tips": "Game Tips",
+    "tip1": "Reading speed increases as level goes up.",
+    "tip2": "Level increases every 5 points.",
+    "tip3": "From level 4, opponent gets points on timeout.",
+    "tip4": "Level 10 is the maximum level.",
+    "tip5": "Wrong answers don't give points to opponent.",
+    "understood": "Got it!"
   }
 }
