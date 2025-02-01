@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { useGameLogic } from '@/composables/useGameLogic'
 import { useI18n } from 'vue-i18n'
+import { useCatData } from '@/composables/useCatData'
 // import { useRouter } from 'vue-router'
 
 const { t } = useI18n()
 // const router = useRouter()
+const { catData, fetchData } = useCatData()
 const {
   gameState,
   displayCat,
@@ -16,6 +18,9 @@ const {
   handleBack
 } = useGameLogic()
 
+const isSelectable = computed(() => gameState.value.status === 'selecting')
+console.log('isSelectable', isSelectable.value)
+
 // ページを離れる前の確認
 // TODO: ブラウザを閉じるときにも出す
 // onBeforeRouteLeave((to, from) => {
@@ -25,7 +30,26 @@ const {
 
 // ゲーム開始時の初期化
 onMounted(async () => {
+  // データが未取得の場合は取得
+  if (catData.value.length === 0) {
+    try {
+      await fetchData()
+    } catch (e) {
+      console.error('データの取得に失敗:', e)
+      return
+    }
+  }
+
   await initialize()
+})
+
+// リロード時の処理
+onBeforeRouteUpdate(() => {
+  window.location.reload()
+})
+
+watch(isSelectable, (newState) => {
+  console.log('isSelectable', newState)
 })
 </script>
 
@@ -70,6 +94,7 @@ onMounted(async () => {
         :is-selectable="gameState.status === 'selecting'"
         :is-revealed="revealedCardId === cat.id"
         :is-correct="revealedCardId === cat.id && cat.id === correctCardId"
+        :is-answer="cat.id === correctCardId"
         @select="handleCardSelect(cat.id)"
       />
     </div>

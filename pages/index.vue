@@ -46,19 +46,15 @@ onMounted(async () => {
       <h1 class="text-4xl md:text-6xl font-bold mb-2 text-pink-800">{{ t('home.title') }}</h1>
     </div>
 
-    <!-- ローディング表示 -->
-    <div v-if="isLoading" class="mb-8">
-      <p class="text-pink-800">{{ t('home.loading') }}</p>
-    </div>
-
     <!-- エラー表示 -->
-    <div v-else-if="error" class="mb-8 text-red-600">
+    <div v-if="error" class="mb-8 text-red-600">
       <p>{{ t('home.error') }}</p>
     </div>
 
     <NuxtLink 
       to="/game"
       class="bg-pink-400 hover:bg-pink-500 text-white font-bold py-4 px-12 rounded-full text-xl md:text-3xl mb-8 transition-colors relative shadow-lg hover:shadow-xl"
+      :class="{ 'opacity-50 cursor-not-allowed': isLoading || !!error }"
       :disabled="isLoading || !!error"
     >
       {{ isLoading ? t('home.loading') : t('home.start') }}

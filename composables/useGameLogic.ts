@@ -31,21 +31,29 @@ export const useGameLogic = () => {
     updateScore
   })
 
-  const { startAnswerTimer, cancelAnswerTimer } = useComputerAnswer({
+  const { startAnswerTimer, cancelAnswerTimer, onComputerAnswer } = useComputerAnswer({
     gameState,
     updateScore
+  })
+
+  // コンピュータの回答時の処理
+  onComputerAnswer(() => {
+    // 正解のカードを表示
+    correctCardId.value = currentCat.value?.id || null
+    // 次のラウンドへ
+    setTimeout(prepareNewRound, 2000)
   })
 
   // テキストのタイピングアニメーション
   const typeMessage = (message: string) => {
     let index = 0
     currentMessage.value = ''
-    // 読み上げ開始と同時に選択可能に
+    // 読み上げ開始と同時に選択可能にする
     updateStatus('selecting')
-    startAnswerTimer()
 
     // 説明文と猫種名を組み合わせる（改行を追加）
     const fullMessage = `${message}\n\nこの猫は「${currentCat.value?.nameJa}」です。`
+    startAnswerTimer(fullMessage.length)
 
     const type = () => {
       if (index < fullMessage.length) {
