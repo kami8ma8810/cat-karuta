@@ -15,7 +15,8 @@ const {
   correctCardId,
   initialize,
   handleCardSelect,
-  handleBack
+  handleBack,
+  handleNext
 } = useGameLogic()
 
 const isSelectable = computed(() => gameState.value.status === 'selecting')
@@ -82,6 +83,14 @@ watch(isSelectable, (newState) => {
           </div>
         </div>
       </div>
+      <!-- 次へ進むボタン -->
+      <button
+        v-if="gameState.status === 'waitingNext'"
+        @click="handleNext"
+        class="mt-4 w-full px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
+      >
+        {{ t('game.next') }}
+      </button>
     </div>
 
     <!-- 猫カードグリッド -->

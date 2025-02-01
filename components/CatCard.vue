@@ -4,7 +4,7 @@
     :class="{
       'hover:scale-105': isSelectable && !isRevealed,
       'opacity-80': !isSelectable || (isRevealed && !isCorrect && !isAnswer),
-      'ring-4 ring-pink-500 ring-offset-2': isAnswer
+      'ring-4 ring-green-500 ring-offset-2': isAnswer
     }"
     @click="handleClick"
   >

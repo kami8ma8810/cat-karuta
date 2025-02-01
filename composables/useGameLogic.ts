@@ -40,8 +40,8 @@ export const useGameLogic = () => {
   onComputerAnswer(() => {
     // 正解のカードを表示
     correctCardId.value = currentCat.value?.id || null
-    // 次のラウンドへ
-    setTimeout(prepareNewRound, 2000)
+    // お手つき後と同様に待機状態に移行
+    updateStatus('waitingNext')
   })
 
   // テキストのタイピングアニメーション
@@ -102,7 +102,22 @@ export const useGameLogic = () => {
       updateLevel(Math.min(gameState.value.level + 1, 10))
     }
 
-    setTimeout(prepareNewRound, 2000)
+    // 読み上げ中のタイマーをクリア
+    if (typingTimer) {
+      clearTimeout(typingTimer)
+    }
+    
+    // 説明文全体を表示
+    const fullMessage = `${currentCat.value?.description}\n\nこの猫は「${currentCat.value?.nameJa}」です。`
+    currentMessage.value = fullMessage
+    
+    // お手つき後の待機状態に移行
+    updateStatus('waitingNext')
+  }
+
+  // 次のラウンドへ進む
+  const handleNext = () => {
+    prepareNewRound()
   }
 
   // 初期化
@@ -133,6 +148,7 @@ export const useGameLogic = () => {
     correctCardId,
     initialize,
     handleCardSelect,
-    handleBack
+    handleBack,
+    handleNext
   }
 }
