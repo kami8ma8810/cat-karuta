@@ -67,6 +67,13 @@ const showRules = ref(false)
           {{ t('home.start') }}
         </NuxtLink>
 
+        <NuxtLink
+          to="/cats"
+          class="block px-8 py-4 bg-white text-pink-800 rounded-lg hover:bg-pink-50 transition-colors text-xl font-bold border-2 border-pink-200"
+        >
+          {{ t('home.catList') }}
+        </NuxtLink>
+
         <button
           @click="showRules = true"
           class="block w-full px-8 py-4 bg-white/80 backdrop-blur-sm text-pink-800 rounded-lg hover:bg-pink-50 transition-colors text-xl font-bold shadow-lg"

@@ -7,6 +7,7 @@
     "title": "Cat Encyclopedia Karuta",
     "start": "Start", 
     "rules": "How to Play",
+    "catList": "View Cat Encyclopedia",
     "loading": "Loading data...",
     "error": "Failed to load data",
     "share": "Share",
