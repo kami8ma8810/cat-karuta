@@ -99,16 +99,23 @@ export const useCatApi = () => {
   const fetchCatsWithImage = async (): Promise<CatBreedWithImage[]> => {
     try {
       const breeds = await fetchBreed()
-      const breedsWithImages = await Promise.all(
-        breeds.map(async (breed: CatBreed): Promise<CatBreedWithImage> => {
+      const breedsWithImagesPromises = await Promise.all(
+        breeds.map(async (breed: CatBreed): Promise<CatBreedWithImage | null> => {
           const imageUrl = await fetchBreedImage(breed.imageId)
+          if (!imageUrl) return null
           return {
             ...breed,
             imageUrl
           }
         })
       )
-      return breedsWithImages
+      const validBreeds = breedsWithImagesPromises.filter((breed): breed is CatBreedWithImage => breed !== null)
+      
+      if (validBreeds.length < 6) {
+        throw new Error('利用可能な猫種が不足しています')
+      }
+      
+      return validBreeds
     } catch (error) {
       return handleApiError(error)
     }
