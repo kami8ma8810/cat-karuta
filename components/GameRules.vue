@@ -18,40 +18,33 @@ defineEmits<{
         <div class="w-8 h-8 flex-shrink-0 bg-pink-100 rounded-full flex items-center justify-center">
           <span class="text-pink-800 font-bold">1</span>
         </div>
-        <p class="text-gray-700">{{ t('rules.step1') }}</p>
+        <p class="text-gray-700">{{ t('rules.step2') }}</p>
       </div>
 
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 flex-shrink-0 bg-pink-100 rounded-full flex items-center justify-center">
           <span class="text-pink-800 font-bold">2</span>
         </div>
-        <p class="text-gray-700">{{ t('rules.step2') }}</p>
+        <p class="text-gray-700">{{ t('rules.step3') }}</p>
       </div>
 
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 flex-shrink-0 bg-pink-100 rounded-full flex items-center justify-center">
           <span class="text-pink-800 font-bold">3</span>
         </div>
-        <p class="text-gray-700">{{ t('rules.step3') }}</p>
+        <p class="text-gray-700">{{ t('rules.step4') }}</p>
       </div>
 
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 flex-shrink-0 bg-pink-100 rounded-full flex items-center justify-center">
           <span class="text-pink-800 font-bold">4</span>
         </div>
-        <p class="text-gray-700">{{ t('rules.step4') }}</p>
-      </div>
-
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 flex-shrink-0 bg-pink-100 rounded-full flex items-center justify-center">
-          <span class="text-pink-800 font-bold">5</span>
-        </div>
         <p class="text-gray-700">{{ t('rules.step5') }}</p>
       </div>
 
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 flex-shrink-0 bg-pink-100 rounded-full flex items-center justify-center">
-          <span class="text-pink-800 font-bold">6</span>
+          <span class="text-pink-800 font-bold">5</span>
         </div>
         <p class="text-gray-700">{{ t('rules.step6') }}</p>
       </div>
@@ -61,10 +54,6 @@ defineEmits<{
       <h3 class="font-bold text-pink-800 mb-2">{{ t('rules.tips') }}</h3>
       <ul class="list-disc list-inside text-gray-700 space-y-2">
         <li>{{ t('rules.tip1') }}</li>
-        <li>{{ t('rules.tip2') }}</li>
-        <li>{{ t('rules.tip3') }}</li>
-        <li>{{ t('rules.tip4') }}</li>
-        <li>{{ t('rules.tip5') }}</li>
       </ul>
     </div>
 
