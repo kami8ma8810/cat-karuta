@@ -37,7 +37,8 @@ export const useGameLogic = () => {
 
   const { startAnswerTimer, cancelAnswerTimer, onComputerAnswer } = useComputerAnswer({
     gameState,
-    updateScore
+    updateScore,
+    updateStatus
   })
 
   // コンピュータの回答時の処理
@@ -51,7 +52,7 @@ export const useGameLogic = () => {
       updateScore('computer')
     }
     // お手つき後と同様に待機状態に移行
-    updateStatus('waitingNext')
+    updateStatus('showResult')
   })
 
   // テキストのタイピングアニメーション

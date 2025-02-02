@@ -15,7 +15,11 @@ export const useGameFlow = () => {
   // 他のcomposablesを統合
   const { state: gameState, updateStatus, updateScore } = useGameState()
   const { handleAnswer } = usePlayerAnswer({ currentCat, gameState, updateScore })
-  const { startAnswerTimer, cancelAnswerTimer } = useComputerAnswer({ gameState, updateScore })
+  const { startAnswerTimer, cancelAnswerTimer } = useComputerAnswer({ 
+    gameState, 
+    updateScore, 
+    updateStatus 
+  })
 
   const prepareNewRound = () => {
     // 全ての猫が使用済みになったらリセット
@@ -35,7 +39,7 @@ export const useGameFlow = () => {
 
   const startRound = () => {
     updateStatus('selecting')
-    startAnswerTimer()
+    startAnswerTimer(currentCat.value?.description.length || 0)
   }
 
   return {

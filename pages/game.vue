@@ -191,37 +191,34 @@ onBeforeRouteUpdate(() => {
         <!-- メッセージエリア -->
         <div class="max-w-4xl mx-auto">
           <div
-            class="bg-white backdrop-blur-sm rounded-lg p-6 border-2 relative"
+            class="bg-white backdrop-blur-sm rounded-lg pt-10 px-4 pb-4 border-2 relative"
           >
             <!-- ステータス表示 -->
             <div
-              v-if="gameState.status !== 'waitingNext'"
-              class="p-2 rounded text-sm font-bold"
-              :class="{
-                'bg-blue-100 text-blue-800': gameState.status === 'reading',
-                'bg-yellow-100 text-yellow-800':
-                  gameState.status === 'selecting',
-                'bg-red-100 text-red-800':
-                  gameState.status === 'showResult' && revealType === 'timeup',
-                'bg-pink-100 text-pink-800':
-                  gameState.status === 'showResult' && revealType === 'mistake',
-              }"
-            >
-              {{
-                gameState.status === "selecting"
-                  ? t("game.status.selecting")
-                  : gameState.status === "showResult" && revealType === "timeup"
-                  ? gameState.level >= 5
-                    ? t("game.status.timeupWithPoint")
-                    : t("game.status.timeup")
-                  : gameState.status === "showResult" &&
-                    revealType === "mistake"
-                  ? gameState.level >= 5
-                    ? t("game.status.mistakeWithPoint")
-                    : t("game.status.mistake")
-                  : ""
-              }}
-            </div>
+            v-if="gameState.status !== 'waitingNext'"
+            class="absolute top-0 left-0 p-2 rounded text-sm font-bold"
+            :class="{
+              'bg-yellow-100 text-yellow-800': gameState.status === 'selecting',
+              'bg-red-100 text-red-800':
+                gameState.status === 'showResult' && revealType === 'timeup',
+              'bg-pink-100 text-pink-800':
+                gameState.status === 'showResult' && revealType === 'mistake',
+            }"
+          >
+            {{
+              gameState.status === "selecting"
+                ? t("game.status.selecting")
+                : gameState.status === "showResult" && revealType === "timeup"
+                ? gameState.level >= 5
+                  ? t("game.status.timeupWithPoint")
+                  : t("game.status.timeup")
+                : gameState.status === "showResult" && revealType === "mistake"
+                ? gameState.level >= 5
+                  ? t("game.status.mistakeWithPoint")
+                  : t("game.status.mistake")
+                : ""
+            }}
+          </div>
             <!-- タイピングテキスト -->
             <p
               class="text-xl min-h-[4rem] relative font-medium"

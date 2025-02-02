@@ -34,7 +34,6 @@
       "back": "Back to Top"
     },
     "status": {
-      "reading": "Reading...",
       "selecting": "Selecting...",
       "timeup": "Time's up!",
       "timeupWithPoint": "Time's up! Opponent gets a point.",

@@ -1,15 +1,17 @@
 import type { Ref } from 'vue'
-import type { GameState } from '@/types/game'
+import type { GameState, GameStatus } from '@/types/game'
 import { COMPUTER_LEVELS } from '@/types/computer'
 
 interface UseComputerAnswerProps {
   gameState: Ref<GameState>
   updateScore: (type: 'player' | 'computer') => void
+  updateStatus: (status: GameStatus) => void
 }
 
 export const useComputerAnswer = ({
   gameState,
-  updateScore
+  updateScore,
+  updateStatus
 }: UseComputerAnswerProps) => {
   // 途中で回答するタイマーとテキスト読み上げ後のタイマー
   let interruptTimerId: NodeJS.Timeout | undefined
@@ -48,7 +50,7 @@ export const useComputerAnswer = ({
           if (level > 3) {
             updateScore('computer')
           }
-          gameState.value.status = 'showResult'
+          updateStatus('showResult')
           onAnswerCallback?.()
         }
       }, interruptTime)
@@ -59,10 +61,10 @@ export const useComputerAnswer = ({
     answerTimerId = setTimeout(() => {
       if (gameState.value.status === 'selecting') {
         // レベル3以下では時間切れでコンピュータの得点にしない
-        if (level > 3) {
+        if (level > 4) {
           updateScore('computer')
         }
-        gameState.value.status = 'showResult'
+        updateStatus('showResult')
         onAnswerCallback?.()
       }
     }, readingTime + maxWaitTime + answerTime)
