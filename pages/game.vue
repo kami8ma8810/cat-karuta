@@ -86,8 +86,19 @@ onBeforeRouteUpdate(() => {
     </div>
 
     <!-- デバッグメニュー（開発環境のみ） -->
-    <div v-if="isDev" class="fixed top-8 right-8 z-50">
+    <div v-if="isDev" class="fixed bottom-8 right-8 z-50">
       <div class="flex flex-col gap-2">
+        <button
+          @click="
+            () => {
+              gameState.level = 5;
+              handleRestart();
+            }
+          "
+          class="px-4 py-2 bg-gray-800 text-white rounded-lg opacity-50 hover:opacity-100"
+        >
+          デバッグ: レベル5スタート
+        </button>
         <button
           @click="
             () => {

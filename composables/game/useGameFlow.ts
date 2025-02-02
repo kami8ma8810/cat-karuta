@@ -1,4 +1,3 @@
-// composables/game/useGameFlow.ts
 import { ref } from 'vue'
 import type { CatBreedWithImage } from '@/types/cat'
 import { useGameState } from './useGameState'
