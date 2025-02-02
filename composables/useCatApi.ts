@@ -10,7 +10,7 @@ import type {
 
 export const useCatApi = () => {
   const config = useRuntimeConfig()
-  const API_KEY = config.public.catApiKey
+  const API_KEY = config.public.catApiKey as string
   const BASE_URL = 'https://api.thecatapi.com/v1'
 
   const breedTranslation: Record<string, CatBreedTranslation> = catBreed
