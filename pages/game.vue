@@ -86,7 +86,7 @@ onBeforeRouteUpdate(() => {
     </div>
 
     <!-- デバッグメニュー（開発環境のみ） -->
-    <div v-if="isDev" class="fixed bottom-8 right-8 z-50">
+    <!-- <div v-if="isDev" class="fixed bottom-8 right-8 z-50">
       <div class="flex flex-col gap-2">
         <button
           @click="
@@ -124,7 +124,7 @@ onBeforeRouteUpdate(() => {
           デバッグ: ゲームオーバー
         </button>
       </div>
-    </div>
+    </div> -->
 
     <div class="flex md:gap-8 gap-4 md:flex-row flex-col-reverse">
       <div class="flex-none flex md:flex-col flex-col-reverse gap-8">
@@ -164,11 +164,11 @@ onBeforeRouteUpdate(() => {
               </div>
             </div>
           </div>
-          <!-- 次へ進む・リトライ ボタン -->
+          <!-- 次へ進む・リトライ ボタン (PCのみ表示) -->
           <button
-            v-if="gameState.status === 'waitingNext' || 
+            v-if="(gameState.status === 'waitingNext' || 
                   gameState.status === 'timeupResult' || 
-                  gameState.status === 'mistakeResult'"
+                  gameState.status === 'mistakeResult')"
             @click="handleNext"
             class="mt-4 w-full px-4 py-2 bg-pink-700 hover:bg-pink-800 text-white rounded-lg transition-colors"
           >
@@ -184,22 +184,44 @@ onBeforeRouteUpdate(() => {
       </div>
       <div class="flex-1">
         <!-- 猫カードグリッド -->
-        <div
-          class="grid grid-cols-2 md:grid-cols-3 md:gap-4 gap-2 md:mb-8 mb-4 max-w-4xl mx-auto"
-        >
-          <CatCard
-            v-for="cat in displayCat"
-            :key="cat.id"
-            :image-url="cat.imageUrl"
-            :name="cat.nameJa"
-            :is-selectable="gameState.status === 'selecting'"
-            :is-revealed="revealedCardId === cat.id"
-            :is-correct="revealedCardId === cat.id && cat.id === correctCardId"
-            :is-answer="cat.id === correctCardId"
-            :reveal-type="revealType"
-            :game-status="gameState.status"
-            @select="handleCardSelect(cat.id)"
-          />
+        <div class="relative">
+          <div
+            class="grid grid-cols-2 md:grid-cols-3 md:gap-4 gap-2 md:mb-8 mb-4 max-w-4xl mx-auto"
+          >
+            <CatCard
+              v-for="cat in displayCat"
+              :key="cat.id"
+              :image-url="cat.imageUrl"
+              :name="cat.nameJa"
+              :is-selectable="gameState.status === 'selecting'"
+              :is-revealed="revealedCardId === cat.id"
+              :is-correct="revealedCardId === cat.id && cat.id === correctCardId"
+              :is-answer="cat.id === correctCardId"
+              :reveal-type="revealType"
+              :game-status="gameState.status"
+              @select="handleCardSelect(cat.id)"
+            />
+          </div>
+          <!-- 次へ進む・リトライ ボタン (スマホのみ表示) -->
+          <div
+            v-if="(gameState.status === 'waitingNext' || 
+                  gameState.status === 'timeupResult' || 
+                  gameState.status === 'mistakeResult')"
+            class="md:hidden flex justify-center z-50"
+          >
+            <button
+              @click="handleNext"
+              class="w-full max-w-md px-4 py-3 bg-pink-700 backdrop-blur-sm hover:bg-pink-800 text-white rounded-lg transition-colors shadow-lg mb-4"
+            >
+              {{
+                gameState.status === 'waitingNext'
+                  ? t("game.next", {
+                      level: gameState.level + 1 > 10 ? 10 : gameState.level + 1,
+                    })
+                  : t("game.retry")
+              }}
+            </button>
+          </div>
         </div>
         <!-- メッセージエリア -->
         <div class="max-w-4xl mx-auto">
