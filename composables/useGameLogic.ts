@@ -53,6 +53,9 @@ export const useGameLogic = () => {
     }
     // お手つき後と同様に待機状態に移行
     updateStatus('showResult')
+    setTimeout(() => {
+      updateStatus('waitingNext')
+    }, 500) // 1.5秒後に次へ進むボタンを表示
   })
 
   // テキストのタイピングアニメーション
@@ -146,7 +149,9 @@ export const useGameLogic = () => {
   // 次のラウンドへ進む
   const handleNext = async () => {
     // プレイヤーが正解していた場合、レベルを1上げる
-    if (gameState.value.status === 'waitingNext' && correctCardId.value === revealedCardId.value) {
+    if (gameState.value.status === 'waitingNext' && 
+        correctCardId.value === revealedCardId.value && 
+        revealType.value !== 'timeup') {
       if (gameState.value.level < 10) {
         gameState.value.level++
       }
