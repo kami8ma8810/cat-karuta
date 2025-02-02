@@ -152,19 +152,16 @@ export const useGameLogic = () => {
     currentMessage.value = fullMessage
   }
 
-  // 次のラウンドへ進む
+  // 次のレベルへ進む
   const handleNext = async () => {
-    // 状態をリセット
-    updateStatus('waiting')
-    // プレイヤーが正解していた場合、レベルを1上げる
-    if (gameState.value.status === 'waitingNext' && 
-        correctCardId.value === revealedCardId.value && 
-        revealType.value !== 'timeup') {
-      if (gameState.value.level < 10) {
-        gameState.value.level++
-      }
+    if (gameState.value.status === 'waitingNext') {
+      // レベルを更新（最大10まで）
+      gameState.value.level = Math.min(gameState.value.level + 1, 10)
+      await prepareNewRound()
+    } else {
+      // 間違いや時間切れの場合は同じレベルでリトライ
+      await prepareNewRound()
     }
-    await prepareNewRound()
   }
 
   // 初期化
