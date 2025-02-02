@@ -43,6 +43,7 @@ export const useGameLogic = () => {
 
   // コンピュータの回答時の処理
   onComputerAnswer(() => {
+    console.log('コンピュータの回答時の処理')
     revealType.value = 'timeup'
     correctCardId.value = currentCat.value?.id || null
     revealedCardId.value = null // 時間切れの場合は選択されたカードなし
@@ -53,6 +54,15 @@ export const useGameLogic = () => {
     }
     // 時間切れ結果表示
     updateStatus('timeupResult')
+    console.log('currentStatus', gameState.value.status)
+    // 説明文全体を表示
+    const fullMessage = `${currentCat.value?.description}\n\nこの猫は「${currentCat.value?.nameJa}」です。`
+    currentMessage.value = fullMessage
+    // ゲームオーバーチェック
+    if (gameState.value.score.computer >= 3) {
+      updateStatus('gameOver')
+      return
+    }
   })
 
   // テキストのタイピングアニメーション
@@ -116,8 +126,7 @@ export const useGameLogic = () => {
     revealType.value = 'mistake'
 
     const isCorrect = handleAnswer(selectedCat)
-    // 時間切れでない場合のみ正解として扱う
-    if (isCorrect && currentCat.value && gameState.value.status !== 'showResult') {
+    if (isCorrect && currentCat.value) {
       correctCatIds.value.add(currentCat.value.id)
       updateStatus('waitingNext')
     } else {

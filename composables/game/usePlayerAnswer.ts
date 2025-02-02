@@ -19,7 +19,6 @@ export const usePlayerAnswer = ({
     const isCorrect = selectedCat.id === currentCat.value?.id
     if (isCorrect) updateScore('player')
 
-    gameState.value.status = 'showResult'
     return isCorrect
   }
 

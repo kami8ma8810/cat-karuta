@@ -155,12 +155,14 @@ onBeforeRouteUpdate(() => {
           </div>
           <!-- 次へ進む・リトライ ボタン -->
           <button
-            v-if="['waitingNext', 'timeupResult', 'mistakeResult'].includes(gameState.status)"
+            v-if="gameState.status === 'waitingNext' || 
+                  gameState.status === 'timeupResult' || 
+                  gameState.status === 'mistakeResult'"
             @click="handleNext"
             class="mt-4 w-full px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
           >
             {{
-              revealedCardId === correctCardId
+              gameState.status === 'waitingNext'
                 ? t("game.next", {
                     level: gameState.level + 1 > 10 ? 10 : gameState.level + 1,
                   })
@@ -194,16 +196,17 @@ onBeforeRouteUpdate(() => {
             class="bg-white backdrop-blur-sm rounded-lg pt-10 px-4 pb-4 border-2 relative"
           >
             <!-- ステータス表示 -->
-             <p>{{ gameState.status }}</p>
             <div
-              v-if="gameState.status === 'selecting' || gameState.status === 'timeupResult' || gameState.status === 'mistakeResult'"
+              v-if="gameState.status === 'selecting' || 
+                    gameState.status === 'timeupResult' || 
+                    gameState.status === 'mistakeResult'"
               class="absolute top-0 left-0 p-2 rounded text-sm font-bold"
               :class="{
                 'bg-yellow-100 text-yellow-800': gameState.status === 'selecting',
                 'bg-red-100 text-red-800':
                   gameState.status === 'timeupResult',
                 'bg-pink-100 text-pink-800':
-                  gameState.status === 'mistakeResult',
+                  gameState.status === 'mistakeResult'
               }"
             >
               {{
@@ -219,6 +222,7 @@ onBeforeRouteUpdate(() => {
                     : t("game.status.mistake")
                   : ""
               }}
+              {{ gameState.status }}
             </div>
             <!-- タイピングテキスト -->
             <p
