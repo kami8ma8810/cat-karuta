@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { useGameLogic } from '@/composables/useGameLogic'
-import { useI18n } from 'vue-i18n'
-import { useCatData } from '@/composables/useCatData'
-import MasterAchievement from '@/components/MasterAchievement.vue'
+import { useGameLogic } from "@/composables/useGameLogic";
+import { useI18n } from "vue-i18n";
+import { useCatData } from "@/composables/useCatData";
+import MasterAchievement from "@/components/MasterAchievement.vue";
 // import { useRuntimeConfig } from 'nuxt'
 // import { useRouter } from 'vue-router'
 
-const isDev = process.env.NODE_ENV === 'development'
+const isDev = process.env.NODE_ENV === "development";
 
-const { t } = useI18n()
+const { t } = useI18n();
 // const router = useRouter()
-const { catData, fetchData } = useCatData()
+const { catData, fetchData } = useCatData();
 const {
   gameState,
   displayCat,
@@ -22,11 +22,11 @@ const {
   handleCardSelect,
   handleBack,
   handleNext,
-  handleRestart
-} = useGameLogic()
+  handleRestart,
+} = useGameLogic();
 
-const isSelectable = computed(() => gameState.value.status === 'selecting')
-console.log('isSelectable', isSelectable.value)
+const isSelectable = computed(() => gameState.value.status === "selecting");
+console.log("isSelectable", isSelectable.value);
 
 // ページを離れる前の確認
 // TODO: ブラウザを閉じるときにも出す
@@ -40,114 +40,129 @@ onMounted(async () => {
   // データが未取得の場合は取得
   if (catData.value.length === 0) {
     try {
-      await fetchData()
+      await fetchData();
     } catch (e) {
-      console.error('データの取得に失敗:', e)
-      return
+      console.error("データの取得に失敗:", e);
+      return;
     }
   }
 
-  await initialize()
-})
+  await initialize();
+});
 
 // リロード時の処理
 onBeforeRouteUpdate(() => {
-  window.location.reload()
-})
+  window.location.reload();
+});
 
 watch(isSelectable, (newState) => {
-  console.log('isSelectable', newState)
-})
+  console.log("isSelectable", newState);
+});
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-b from-pink-50 to-green-50 p-4">
+  <div class="min-h-screen bg-gradient-to-b from-pink-50 to-green-50 p-8">
     <!-- デバッグメニュー（開発環境のみ） -->
-    <div v-if="isDev" class="fixed top-4 right-4 z-50">
+    <div v-if="isDev" class="fixed top-8 right-8 z-50">
       <button
-        @click="() => {
-          gameState.level = 9;
-          gameState.score.player = 45;
-          gameState.status = 'gameCleared';
-          handleCardSelect(correctCardId || '');
-        }"
+        @click="
+          () => {
+            gameState.level = 9;
+            gameState.score.player = 45;
+            gameState.status = 'gameCleared';
+            handleCardSelect(correctCardId || '');
+          }
+        "
         class="px-4 py-2 bg-gray-800 text-white rounded-lg opacity-50 hover:opacity-100"
       >
         デバッグ: ゲームクリア
       </button>
     </div>
 
-    <!-- トップに戻るボタン -->
-    <button
-      @click="handleBack"
-      class="fixed top-4 left-4 flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm text-pink-800 hover:bg-pink-50 rounded-lg transition-colors shadow-md"
-    >
-      <Icon name="i-heroicons-arrow-left" class="w-6 h-6" />
-      <span>{{ t('game.back') }}</span>
-    </button>
-
-    <!-- スコアボード -->
-    <div class="fixed left-4 top-20 bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-md">
-      <div class="mb-4">
-        <span class="text-xl font-bold text-pink-800">{{ t('game.level') }} {{ gameState.level }}</span>
-      </div>
-      <div class="flex flex-col gap-4">
-        <div class="flex gap-4">
-          <p class="text-md font-bold text-pink-800">{{ t('game.score') }}</p>
-          <div class="text-center">
-            <p class="text-sm text-pink-600">{{ t('game.player') }}</p>
-            <p class="text-2xl font-bold text-pink-800">{{ gameState.score.player }}</p>
+    <div class="flex gap-8">
+      <div class="flex-none flex flex-col gap-8">
+        <!-- トップに戻るボタン -->
+        <button
+          @click="handleBack"
+          class="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm text-pink-800 hover:bg-pink-50 rounded-lg transition-colors shadow-md"
+        >
+          <Icon name="i-heroicons-arrow-left" class="w-6 h-6" />
+          <span>{{ t("game.back") }}</span>
+        </button>
+        <!-- スコアボード -->
+        <div
+          class="flex-none bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-md"
+        >
+          <div class="mb-4">
+            <span class="text-xl font-bold text-pink-800"
+              >{{ t("game.level") }} {{ gameState.level }}</span
+            >
           </div>
-          <div class="text-center">
-            <p class="text-sm text-pink-600">{{ t('game.opponent') }}</p>
-            <p class="text-2xl font-bold text-pink-800">{{ gameState.score.computer }}</p>
+          <div class="flex flex-col gap-4">
+            <div class="flex gap-4">
+              <p class="text-md font-bold text-pink-800">
+                {{ t("game.score") }}
+              </p>
+              <div class="text-center">
+                <p class="text-sm text-pink-600">{{ t("game.player") }}</p>
+                <p class="text-2xl font-bold text-pink-800">
+                  {{ gameState.score.player }}
+                </p>
+              </div>
+              <div class="text-center">
+                <p class="text-sm text--600">{{ t("game.opponent") }}</p>
+                <p class="text-2xl font-bold text-pink-800">
+                  {{ gameState.score.computer }}
+                </p>
+              </div>
+            </div>
           </div>
+          <!-- 次へ進むボタン -->
+          <button
+            v-if="gameState.status === 'waitingNext'"
+            @click="handleNext"
+            class="mt-4 w-full px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
+          >
+            {{ t("game.next") }}
+          </button>
         </div>
       </div>
-      <!-- 次へ進むボタン -->
-      <button
-        v-if="gameState.status === 'waitingNext'"
-        @click="handleNext"
-        class="mt-4 w-full px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
-      >
-        {{ t('game.next') }}
-      </button>
-    </div>
-
-    <!-- 猫カードグリッド -->
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8 max-w-4xl mx-auto">
-      <CatCard
-        v-for="cat in displayCat"
-        :key="cat.id"
-        :image-url="cat.imageUrl"
-        :name="cat.nameJa"
-        :is-selectable="gameState.status === 'selecting'"
-        :is-revealed="revealedCardId === cat.id"
-        :is-correct="revealedCardId === cat.id && cat.id === correctCardId"
-        :is-answer="cat.id === correctCardId"
-        :reveal-type="revealType"
-        :game-status="gameState.status"
-        @select="handleCardSelect(cat.id)"
-      />
-    </div>
-
-    <!-- メッセージエリア -->
-    <div class="max-w-4xl mx-auto">
-      <div 
-        class="bg-white backdrop-blur-sm rounded-lg p-6 border-2"
-      >
-        <!-- タイピングテキスト -->
-        <p 
-          class="text-xl min-h-[4rem] relative font-medium"
-          :class="{ 'typing-cursor': gameState.status === 'reading' }"
+      <div class="flex-1">
+        <!-- 猫カードグリッド -->
+        <div
+          class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8 max-w-4xl mx-auto"
         >
-          <span 
-            class="text-pink-800"
-            :class="{ 'animate-typing': gameState.status === 'reading' }"
-          >
-            {{ currentMessage }}
-          </span>
-        </p>
+          <CatCard
+            v-for="cat in displayCat"
+            :key="cat.id"
+            :image-url="cat.imageUrl"
+            :name="cat.nameJa"
+            :is-selectable="gameState.status === 'selecting'"
+            :is-revealed="revealedCardId === cat.id"
+            :is-correct="revealedCardId === cat.id && cat.id === correctCardId"
+            :is-answer="cat.id === correctCardId"
+            :reveal-type="revealType"
+            :game-status="gameState.status"
+            @select="handleCardSelect(cat.id)"
+          />
+        </div>
+        <!-- メッセージエリア -->
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-white backdrop-blur-sm rounded-lg p-6 border-2">
+            <!-- タイピングテキスト -->
+            <p
+              class="text-xl min-h-[4rem] relative font-medium"
+              :class="{ 'typing-cursor': gameState.status === 'reading' }"
+            >
+              <span
+                class="text-pink-800"
+                :class="{ 'animate-typing': gameState.status === 'reading' }"
+              >
+                {{ currentMessage }}
+              </span>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -162,16 +177,21 @@ watch(isSelectable, (newState) => {
 
 <style scoped>
 .typing-cursor::after {
-  content: '|';
+  content: "|";
   position: absolute;
   margin-left: 2px;
   animation: cursor 1s infinite;
-  color: theme('colors.pink.500');
+  color: theme("colors.pink.500");
 }
 
 @keyframes cursor {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 .animate-typing {
