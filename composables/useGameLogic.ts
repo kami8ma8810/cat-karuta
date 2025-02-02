@@ -5,6 +5,7 @@ import { useGameState } from './game/useGameState'
 import type { CatBreedWithImage } from '@/types/cat'
 import { selectRandom } from '@/utils/randomSelect'
 import { useCatData } from '@/composables/useCatData'
+import type { RevealType } from '@/types/game'
 
 export const useGameLogic = () => {
   // 状態管理
