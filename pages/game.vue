@@ -55,7 +55,7 @@ onBeforeRouteUpdate(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-b from-pink-50 to-green-50 p-8">
+  <div class="min-h-screen bg-gradient-to-b from-pink-50 to-green-50 md:p-8 p-4">
     <!-- ローディング表示 -->
     <div
       v-if="isLoading"
@@ -115,12 +115,12 @@ onBeforeRouteUpdate(() => {
       </div>
     </div>
 
-    <div class="flex gap-8">
-      <div class="flex-none flex flex-col gap-8">
+    <div class="flex md:gap-8 gap-4 md:flex-row flex-col-reverse">
+      <div class="flex-none flex md:flex-col flex-col-reverse gap-8">
         <!-- トップに戻るボタン -->
         <button
           @click="handleBack"
-          class="flex items-center gap-2 px-4 py-2 bg-white backdrop-blur-sm text-pink-800 hover:bg-pink-50 rounded-lg transition-colors shadow-md"
+          class="flex items-center gap-2 px-4 py-2 backdrop-blur-sm bg-pink-700 hover:bg-pink-800 text-white rounded-lg transition-colors shadow-md"
         >
           <Icon name="i-heroicons-arrow-left" class="w-6 h-6" />
           <span>{{ t("game.back") }}</span>
@@ -130,24 +130,24 @@ onBeforeRouteUpdate(() => {
           class="flex-none bg-white backdrop-blur-sm p-4 rounded-lg shadow-md min-w-[200px]"
         >
           <div class="mb-4">
-            <span class="text-xl font-bold text-pink-800"
+            <span class="md:text-xl text-md font-bold text-pink-800"
               >{{ t("game.level") }} {{ gameState.level }}</span
             >
           </div>
           <div class="flex flex-col gap-4">
             <div class="flex gap-4">
-              <p class="text-md font-bold text-pink-800">
+              <p class="md:text-md text-sm font-bold text-pink-800">
                 {{ t("game.score") }}
               </p>
               <div class="text-center">
-                <p class="text-sm text-pink-600">{{ t("game.player") }}</p>
-                <p class="text-2xl font-bold text-pink-800">
+                <p class="md:text-sm text-xs text-pink-600">{{ t("game.player") }}</p>
+                <p class="md:text-2xl text-xl font-bold text-pink-800">
                   {{ gameState.score.player }}
                 </p>
               </div>
               <div class="text-center">
-                <p class="text-sm text--600">{{ t("game.opponent") }}</p>
-                <p class="text-2xl font-bold text-pink-800">
+                <p class="md:text-sm text-xs text-pink-600">{{ t("game.opponent") }}</p>
+                <p class="md:text-2xl text-xl font-bold text-pink-800">
                   {{ gameState.score.computer }}
                 </p>
               </div>
@@ -174,7 +174,7 @@ onBeforeRouteUpdate(() => {
       <div class="flex-1">
         <!-- 猫カードグリッド -->
         <div
-          class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8 max-w-4xl mx-auto"
+          class="grid grid-cols-2 md:grid-cols-3 md:gap-4 gap-2 md:mb-8 mb-4 max-w-4xl mx-auto"
         >
           <CatCard
             v-for="cat in displayCat"
@@ -193,14 +193,14 @@ onBeforeRouteUpdate(() => {
         <!-- メッセージエリア -->
         <div class="max-w-4xl mx-auto">
           <div
-            class="bg-white backdrop-blur-sm rounded-lg pt-10 px-4 pb-4 border-2 relative"
+            class="bg-white backdrop-blur-sm rounded-lg md:pt-10 pt-8 px-4 pb-4 border-2 relative"
           >
             <!-- ステータス表示 -->
             <div
               v-if="gameState.status === 'selecting' || 
                     gameState.status === 'timeupResult' || 
                     gameState.status === 'mistakeResult'"
-              class="absolute top-0 left-0 p-2 rounded text-sm font-bold"
+              class="absolute top-0 left-0 md:p-2 p-1 rounded md:text-sm text-xs font-bold"
               :class="{
                 'bg-yellow-100 text-yellow-800': gameState.status === 'selecting',
                 'bg-red-100 text-red-800':
@@ -225,11 +225,11 @@ onBeforeRouteUpdate(() => {
             </div>
             <!-- タイピングテキスト -->
             <p
-              class="text-xl min-h-[4rem] relative font-medium"
+              class="md:text-xl text-sm min-h-[4rem] relative font-medium"
               :class="{ 'typing-cursor': gameState.status === 'reading' }"
             >
               <span
-                class="text-pink-800"
+                class="text-pink-800 font-bold"
                 :class="{ 'animate-typing': gameState.status === 'reading' }"
               >
                 {{ currentMessage }}

@@ -30,7 +30,7 @@
       class="absolute z-10 inset-0 flex items-end justify-center"
     >
       <div class="text-center p-2 w-full bg-black rounded-lg">
-        <p class="text-sm font-bold text-white">{{ name }}</p>
+        <p class="md:text-sm text-xs font-bold text-white">{{ name }}</p>
       </div>
     </div>
 
