@@ -62,14 +62,28 @@ const showRules = ref(false)
       <div class="space-y-4">
         <NuxtLink
           to="/game"
-          class="block px-8 py-4 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors text-xl font-bold shadow-lg"
+          class="block px-8 py-4 rounded-lg text-xl font-bold shadow-lg transition-colors"
+          :class="[
+            isLoading || error
+              ? 'bg-pink-300 cursor-not-allowed text-white'
+              : 'bg-pink-600 text-white hover:bg-pink-700'
+          ]"
+          :aria-disabled="isLoading || error"
+          @click.prevent="isLoading || error ? null : navigateTo('/game')"
         >
           {{ t('home.start') }}
         </NuxtLink>
 
         <NuxtLink
           to="/cats"
-          class="block px-8 py-4 bg-white text-pink-800 rounded-lg hover:bg-pink-50 transition-colors text-xl font-bold border-2 border-pink-200"
+          class="block px-8 py-4 rounded-lg text-xl font-bold transition-colors border-2"
+          :class="[
+            isLoading || error
+              ? 'bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed'
+              : 'bg-white text-pink-800 hover:bg-pink-50 border-pink-200'
+          ]"
+          :aria-disabled="isLoading || error"
+          @click.prevent="isLoading || error ? null : navigateTo('/cats')"
         >
           {{ t('home.catList') }}
         </NuxtLink>
@@ -94,7 +108,7 @@ const showRules = ref(false)
     </div>
 
     <!-- エラー表示 -->
-    <div v-if="error" class="mb-8 text-red-600">
+    <div v-if="error" class="mt-8 text-red-700 font-bold text-2xl">
       <p>{{ t('home.error') }}</p>
     </div>
 
