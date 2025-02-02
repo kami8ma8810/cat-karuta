@@ -195,7 +195,6 @@ onBeforeRouteUpdate(() => {
           <div
             class="bg-white backdrop-blur-sm rounded-lg pt-10 px-4 pb-4 border-2 relative"
           >
-          <p>{{ gameState.status }}</p>
             <!-- ステータス表示 -->
             <div
               v-if="gameState.status === 'selecting' || 

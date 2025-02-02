@@ -80,7 +80,10 @@ const props = withDefaults(defineProps<Props>(), {
   gameStatus: '',
 });
 
-const showBreedName = computed(() => props.gameStatus === 'waitingNext');
+const showBreedName = computed(() => {
+  const revealStatuses = ['waitingNext', 'timeupResult', 'mistakeResult']
+  return revealStatuses.includes(props.gameStatus)
+})
 
 const emit = defineEmits<{
   select: [];

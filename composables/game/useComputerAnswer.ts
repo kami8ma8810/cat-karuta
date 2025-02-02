@@ -66,6 +66,7 @@ export const useComputerAnswer = ({
         }
         // 正解のカードを表示
         onAnswerCallback?.()
+        updateStatus('timeupResult')
       }
     }, readingTime + maxWaitTime + answerTime)
   }
