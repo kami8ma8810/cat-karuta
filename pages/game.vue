@@ -199,14 +199,17 @@ onBeforeRouteUpdate(() => {
             <div
               v-if="gameState.status === 'selecting' || 
                     gameState.status === 'timeupResult' || 
-                    gameState.status === 'mistakeResult'"
+                    gameState.status === 'mistakeResult' ||
+                    gameState.status === 'waitingNext'"
               class="absolute top-0 left-0 md:p-2 p-1 rounded md:text-sm text-xs font-bold"
               :class="{
                 'bg-yellow-100 text-yellow-800': gameState.status === 'selecting',
                 'bg-red-100 text-red-800':
                   gameState.status === 'timeupResult',
                 'bg-pink-100 text-pink-800':
-                  gameState.status === 'mistakeResult'
+                  gameState.status === 'mistakeResult',
+                'bg-green-100 text-green-800':
+                  gameState.status === 'waitingNext'
               }"
             >
               {{
@@ -220,7 +223,9 @@ onBeforeRouteUpdate(() => {
                   ? gameState.level >= 5
                     ? t("game.status.mistakeWithPoint")
                     : t("game.status.mistake")
-                  : ""
+                : gameState.status === "waitingNext"
+                ? t("game.status.correct")
+                : ""
               }}
             </div>
             <!-- タイピングテキスト -->

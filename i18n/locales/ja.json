@@ -19,7 +19,7 @@
     "opponent": "相手",
     "level": "レベル",
     "score": "スコア",
-    "correct": "正解",
+    "correct": "正解！",
     "incorrect": "不正解",
     "waiting": "待機中...",
     "back": "トップに戻る",
@@ -35,10 +35,11 @@
       "back": "トップに戻る"
     },
     "status": {
+      "correct": "正解！",
       "selecting": "回答できます",
       "timeup": "時間切れ！",
       "timeupWithPoint": "時間切れ！相手にポイントが入ります",
-      "mistake": "残念！",
+      "mistake": "不正解！",
       "mistakeWithPoint": "残念！相手にポイントが入ります"
     },
     "catName": "この猫は「{name}」です。"
@@ -69,3 +70,4 @@
     "error": "データの読み込みに失敗しました"
   }
 }
+
