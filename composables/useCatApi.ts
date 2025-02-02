@@ -81,9 +81,11 @@ export const useCatApi = () => {
     if (!imageId) return null
 
     try {
-      const response = await fetch(`${BASE_URL}/images/${imageId}`, {
-        headers: { 'x-api-key': API_KEY }
-      })
+      const response = process.env.NODE_ENV === 'development' 
+        ? await fetch(`/api/images/${imageId}`)
+        : await fetch(`${BASE_URL}/images/${imageId}`, {
+            headers: { 'x-api-key': API_KEY }
+          })
       
       if (!response.ok) {
         console.error(`Image fetch failed: ${response.status}`)
