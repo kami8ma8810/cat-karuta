@@ -1,4 +1,6 @@
-export const catBreed = {
+import type { CatBreedTranslation } from '@/types/cat'
+
+export const catBreed: Record<string, CatBreedTranslation> = {
   'abys': {
     id: 'abys',
     nameJa: 'アビシニアン',
@@ -52,7 +54,8 @@ export const catBreed = {
   'beng': {
     id: 'beng',
     nameJa: 'ベンガル',
-    descriptionJa: '賢く活発で要求の多い猫種です。ヒョウのような模様が特徴的で、飼い主との深い関係を求めます。'
+    descriptionJa: '賢く活発で要求の多い猫種です。ヒョウのような模様が特徴的で、飼い主との深い関係を求めます。',
+    imagePosition: 'object-right'
   },
   'birm': {
     id: 'birm',

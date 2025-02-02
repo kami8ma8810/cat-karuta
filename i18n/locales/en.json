@@ -40,7 +40,8 @@
       "timeupWithPoint": "Time's up! Opponent gets a point.",
       "mistake": "Too bad!",
       "mistakeWithPoint": "Too bad! Opponent gets a point."
-    }
+    },
+    "catName": "This cat is \"{name}\"."
   },
   "rules": {
     "title": "How to Play",

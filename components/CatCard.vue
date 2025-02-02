@@ -21,6 +21,7 @@
       :alt="name"
       @load="isLoading = false"
       class="w-full h-full object-cover rounded-lg shadow-md"
+      :class="imagePositionClass"
     />
 
     <!-- 猫種名表示オーバーレイ -->
@@ -60,6 +61,8 @@
 </template>
 
 <script setup lang="ts">
+import { catBreed } from '@/assets/data/catBreed'
+
 interface Props {
   imageUrl: string | null;
   name: string;
@@ -83,6 +86,11 @@ const props = withDefaults(defineProps<Props>(), {
 const showBreedName = computed(() => {
   const revealStatuses = ['waitingNext', 'timeupResult', 'mistakeResult']
   return revealStatuses.includes(props.gameStatus)
+})
+
+const imagePositionClass = computed(() => {
+  const breed = Object.values(catBreed).find(b => b.nameJa === props.name)
+  return breed?.imagePosition || 'object-center'
 })
 
 const emit = defineEmits<{

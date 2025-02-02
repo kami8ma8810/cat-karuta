@@ -20,6 +20,7 @@ export interface CatBreedTranslation {
   id: string;
   nameJa: string;
   descriptionJa: string;
+  imagePosition?: string;
 }
 
 export interface CatBreed {

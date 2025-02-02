@@ -53,9 +53,10 @@ const sortedCats = computed(() => {
         class="bg-white rounded-lg shadow-md overflow-hidden"
       >
         <img
-          :src="cat.imageUrl"
+          :src="cat.imageUrl || ''"
           :alt="cat.nameJa"
           class="w-full aspect-square object-cover"
+          :class="cat.id === 'beng' ? 'object-right' : 'object-left'"
         />
         <div class="p-4">
           <h2 class="text-lg font-bold text-pink-800">{{ cat.nameJa }}</h2>
