@@ -17,13 +17,13 @@ useHead({
 })
 
 // 言語切り替えメニューの状態管理
-const isLangMenuOpen = ref(false)
+// const isLangMenuOpen = ref(false)
 
 // 言語切り替え関数
-const toggleLanguage = () => {
-  locale.value = locale.value === 'ja' ? 'en' : 'ja'
-  isLangMenuOpen.value = false
-}
+// const toggleLanguage = () => {
+//   locale.value = locale.value === 'ja' ? 'en' : 'ja'
+//   isLangMenuOpen.value = false
+// }
 
 // トップページでデータを事前取得
 onMounted(async () => {
@@ -121,7 +121,7 @@ const showRules = ref(false)
         {{ t('home.developer') }}
       </a>
     </div>
-    <div class="fixed bottom-8 right-8">
+    <!-- <div class="fixed bottom-8 right-8">
       <button
         @click="isLangMenuOpen = !isLangMenuOpen"
         class="bg-white px-4 py-2 rounded-full shadow-md hover:shadow-lg text-pink-700 hover:bg-pink-50 flex items-cneter gap-2"
@@ -155,6 +155,6 @@ const showRules = ref(false)
           </svg>
         </button>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
