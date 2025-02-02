@@ -23,7 +23,8 @@
     "waiting": "Waiting...",
     "back": "Back to Top",
     "confirmBack": "Do you want to quit the game and go back?",
-    "next": "Next Question",
+    "next": "Level {level} next",
+    "retry": "Retry",
     "loading": "Loading data...",
     "error": "Failed to load data",
     "backToHome": "Back to Top",
@@ -31,6 +32,14 @@
       "title": "Game Over",
       "restart": "Play again",
       "back": "Back to Top"
+    },
+    "status": {
+      "reading": "Reading...",
+      "selecting": "Selecting...",
+      "timeup": "Time's up!",
+      "timeupWithPoint": "Time's up! Opponent gets a point.",
+      "mistake": "Too bad!",
+      "mistakeWithPoint": "Too bad! Opponent gets a point."
     }
   },
   "rules": {
@@ -42,8 +51,8 @@
     "step5": "Game over when opponent gets 3 points.",
     "tips": "Game Tips",
     "tip1": "Reading speed increases as level goes up.",
-    "tip2": "Level increases every 5 points.",
-    "tip3": "From level 4, opponent gets points on timeout.",
+    "tip2": "Level increases every 1 point.",
+    "tip3": "From level 5, opponent gets points on timeout or wrong answer.",
     "tip4": "Level 10 is the maximum level.",
     "tip5": "Wrong answers don't give points to opponent.",
     "understood": "Got it!",

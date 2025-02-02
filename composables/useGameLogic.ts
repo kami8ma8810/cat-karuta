@@ -46,6 +46,10 @@ export const useGameLogic = () => {
     correctCardId.value = currentCat.value?.id || null
     revealedCardId.value = currentCat.value?.id || null
     revealType.value = 'timeup'
+    // レベル5以上で時間切れの場合は相手にポイント
+    if (gameState.value.level >= 5) {
+      updateScore('computer')
+    }
     // お手つき後と同様に待機状態に移行
     updateStatus('waitingNext')
   })
@@ -73,7 +77,7 @@ export const useGameLogic = () => {
   }
 
   // 新しいラウンドの準備
-  const prepareNewRound = () => {
+  const prepareNewRound = async () => {
     // 正解していない猫から選択
     const availableCats = allCat.value.filter(cat => !correctCatIds.value.has(cat.id))
     // 利用可能な猫が6匹未満になったら一時的な使用履歴のみリセット
@@ -111,8 +115,12 @@ export const useGameLogic = () => {
     revealType.value = 'mistake'
 
     const isCorrect = handleAnswer(selectedCat)
-    if (isCorrect && currentCat.value) {
+    // 時間切れでない場合のみ正解として扱う
+    if (isCorrect && currentCat.value && gameState.value.status !== 'showResult') {
       correctCatIds.value.add(currentCat.value.id)
+    } else if (!isCorrect && gameState.value.level >= 5) {
+      // レベル5以上でお手つきの場合は相手にポイント
+      updateScore('computer')
     }
 
     // ゲームオーバーチェック
@@ -135,13 +143,19 @@ export const useGameLogic = () => {
   }
 
   // 次のラウンドへ進む
-  const handleNext = () => {
-    prepareNewRound()
+  const handleNext = async () => {
+    // プレイヤーが正解していた場合、レベルを1上げる
+    if (gameState.value.status === 'waitingNext' && correctCardId.value === revealedCardId.value) {
+      if (gameState.value.level < 10) {
+        gameState.value.level++
+      }
+    }
+    await prepareNewRound()
   }
 
   // 初期化
   const initialize = async () => {
-    prepareNewRound()
+    await prepareNewRound()
   }
 
   // ゲームを中断してホームに戻る

@@ -32,10 +32,46 @@ export const useCatData = () => {
     return cached ? JSON.parse(cached) : null
   }
 
+  // 画像の有効性をチェック
+  const validateImage = (url: string): Promise<boolean> => {
+    return new Promise((resolve) => {
+      const timeout = setTimeout(() => resolve(false), 5000)
+      const img = new Image()
+      img.onload = () => {
+        clearTimeout(timeout)
+        resolve(true)
+      }
+      img.onerror = () => {
+        clearTimeout(timeout)
+        resolve(false)
+      }
+      img.src = url
+    })
+  }
+
+  // 画像の有効性を確認して、有効な猫のデータのみを返す
+  const validateCatsWithImages = async (cats: CatBreedWithImage[]): Promise<CatBreedWithImage[]> => {
+    const validationResults = await Promise.all(
+      cats.map(async (cat) => {
+        if (!cat.imageUrl) return null
+        const isValid = await validateImage(cat.imageUrl)
+        return isValid ? cat : null
+      })
+    )
+    return validationResults.filter((cat): cat is CatBreedWithImage => cat !== null)
+  }
+
   // データの取得
   const fetchData = async () => {
     // メモリ内キャッシュをチェック
     if (catData.value.length > 0) {
+      // メモリ内キャッシュの画像を再検証
+      const validData = await validateCatsWithImages(catData.value)
+      if (validData.length >= 6) {
+        catData.value = validData
+        return validData
+      }
+      // 有効な画像が不足している場合は新しくデータを取得
       return catData.value
     }
 
@@ -43,8 +79,15 @@ export const useCatData = () => {
     if (isCacheValid()) {
       const cached = loadFromCache()
       if (cached) {
-        catData.value = cached
-        return cached
+        // キャッシュの画像を再検証
+        const validData = await validateCatsWithImages(cached)
+        if (validData.length >= 6) {
+          catData.value = validData
+          saveToCache(validData) // 有効なデータで更新
+          return validData
+        }
+        // 有効な画像が不足している場合は新しくデータを取得
+        return catData.value
       }
     }
 
@@ -53,9 +96,17 @@ export const useCatData = () => {
 
     try {
       const data = await fetchCatsWithImage()
-      catData.value = data
-      saveToCache(data)
-      return data
+      // 画像の有効性を確認
+      const validData = await validateCatsWithImages(data)
+      
+      // 最低6匹の有効な猫データがあることを確認
+      if (validData.length < 6) {
+        throw new Error('有効な画像を持つ猫が不足しています')
+      }
+      
+      catData.value = validData
+      saveToCache(validData)
+      return validData
     } catch (e) {
       error.value = e instanceof Error ? e : new Error('データの取得に失敗しました')
       throw error.value

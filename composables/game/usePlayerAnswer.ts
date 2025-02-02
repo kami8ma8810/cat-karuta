@@ -14,7 +14,6 @@ export const usePlayerAnswer = ({
   updateScore
 }: UsePlayerAnswerProps) => {
   const handleAnswer = (selectedCat: CatBreedWithImage): boolean => {
-    console.log('gameState.value.status', gameState.value.status)
     if (gameState.value.status !== 'selecting') return false
 
     const isCorrect = selectedCat.id === currentCat.value?.id

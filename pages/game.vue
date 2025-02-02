@@ -3,7 +3,7 @@ import { useGameLogic } from "@/composables/useGameLogic";
 import { useI18n } from "vue-i18n";
 import { useCatData } from "@/composables/useCatData";
 import MasterAchievement from "@/components/MasterAchievement.vue";
-import GameOver from '@/components/GameOver.vue'
+import GameOver from "@/components/GameOver.vue";
 // import { useRuntimeConfig } from 'nuxt'
 // import { useRouter } from 'vue-router'
 
@@ -57,22 +57,30 @@ onBeforeRouteUpdate(() => {
 <template>
   <div class="min-h-screen bg-gradient-to-b from-pink-50 to-green-50 p-8">
     <!-- ローディング表示 -->
-    <div v-if="isLoading" class="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
+    <div
+      v-if="isLoading"
+      class="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50"
+    >
       <div class="text-center">
-        <div class="animate-spin rounded-full h-12 w-12 border-4 border-pink-500 border-t-transparent mb-4"></div>
-        <p class="text-pink-800">{{ t('game.loading') }}</p>
+        <div
+          class="animate-spin rounded-full h-12 w-12 border-4 border-pink-500 border-t-transparent mb-4"
+        ></div>
+        <p class="text-pink-800">{{ t("game.loading") }}</p>
       </div>
     </div>
 
     <!-- エラー表示 -->
-    <div v-if="error" class="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
+    <div
+      v-if="error"
+      class="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50"
+    >
       <div class="bg-white p-6 rounded-lg shadow-lg max-w-md text-center">
-        <p class="text-red-600 mb-4">{{ t('game.error') }}</p>
+        <p class="text-red-600 mb-4">{{ t("game.error") }}</p>
         <button
           @click="handleBack"
           class="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
         >
-          {{ t('game.backToHome') }}
+          {{ t("game.backToHome") }}
         </button>
       </div>
     </div>
@@ -119,7 +127,7 @@ onBeforeRouteUpdate(() => {
         </button>
         <!-- スコアボード -->
         <div
-          class="flex-none bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-md"
+          class="flex-none bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-md min-w-[200px]"
         >
           <div class="mb-4">
             <span class="text-xl font-bold text-pink-800"
@@ -145,13 +153,19 @@ onBeforeRouteUpdate(() => {
               </div>
             </div>
           </div>
-          <!-- 次へ進むボタン -->
+          <!-- 次へ進む・リトライ ボタン -->
           <button
             v-if="gameState.status === 'waitingNext'"
             @click="handleNext"
             class="mt-4 w-full px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
           >
-            {{ t("game.next") }}
+            {{
+              revealedCardId === correctCardId
+                ? t("game.next", {
+                    level: gameState.level + 1 > 10 ? 10 : gameState.level + 1,
+                  })
+                : t("game.retry")
+            }}
           </button>
         </div>
       </div>
@@ -176,7 +190,38 @@ onBeforeRouteUpdate(() => {
         </div>
         <!-- メッセージエリア -->
         <div class="max-w-4xl mx-auto">
-          <div class="bg-white backdrop-blur-sm rounded-lg p-6 border-2">
+          <div
+            class="bg-white backdrop-blur-sm rounded-lg p-6 border-2 relative"
+          >
+            <!-- ステータス表示 -->
+            <div
+              v-if="gameState.status !== 'waitingNext'"
+              class="p-2 rounded text-sm font-bold"
+              :class="{
+                'bg-blue-100 text-blue-800': gameState.status === 'reading',
+                'bg-yellow-100 text-yellow-800':
+                  gameState.status === 'selecting',
+                'bg-red-100 text-red-800':
+                  gameState.status === 'showResult' && revealType === 'timeup',
+                'bg-pink-100 text-pink-800':
+                  gameState.status === 'showResult' && revealType === 'mistake',
+              }"
+            >
+              {{
+                gameState.status === "selecting"
+                  ? t("game.status.selecting")
+                  : gameState.status === "showResult" && revealType === "timeup"
+                  ? gameState.level >= 5
+                    ? t("game.status.timeupWithPoint")
+                    : t("game.status.timeup")
+                  : gameState.status === "showResult" &&
+                    revealType === "mistake"
+                  ? gameState.level >= 5
+                    ? t("game.status.mistakeWithPoint")
+                    : t("game.status.mistake")
+                  : ""
+              }}
+            </div>
             <!-- タイピングテキスト -->
             <p
               class="text-xl min-h-[4rem] relative font-medium"
