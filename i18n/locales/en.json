@@ -5,7 +5,7 @@
   },
   "home": {
     "title": "Cat Encyclopedia Karuta",
-    "start": "Start", 
+    "start": "Start Game", 
     "rules": "How to Play",
     "catList": "View Cat Encyclopedia",
     "loading": "Loading data...",

@@ -57,7 +57,7 @@ const showRules = ref(false)
     </div>
 
     <div class="relative z-10 text-center">
-      <h1 class="text-4xl font-bold text-pink-800 mb-8">{{ t('home.title') }}</h1>
+      <h1 class="text-4xl font-bold text-pink-800 mb-8 tracking-widest">{{ t('home.title') }}</h1>
       
       <div class="space-y-4">
         <NuxtLink
