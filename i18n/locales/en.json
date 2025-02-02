@@ -26,7 +26,12 @@
     "next": "Next Question",
     "loading": "Loading data...",
     "error": "Failed to load data",
-    "backToHome": "Back to Top"
+    "backToHome": "Back to Top",
+    "gameOver": {
+      "title": "Game Over",
+      "restart": "Play again",
+      "back": "Back to Top"
+    }
   },
   "rules": {
     "title": "How to Play",

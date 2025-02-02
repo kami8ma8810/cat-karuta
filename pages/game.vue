@@ -79,19 +79,32 @@ onBeforeRouteUpdate(() => {
 
     <!-- デバッグメニュー（開発環境のみ） -->
     <div v-if="isDev" class="fixed top-8 right-8 z-50">
-      <button
-        @click="
-          () => {
-            gameState.level = 9;
-            gameState.score.player = 45;
-            gameState.status = 'gameCleared';
-            handleCardSelect(correctCardId || '');
-          }
-        "
-        class="px-4 py-2 bg-gray-800 text-white rounded-lg opacity-50 hover:opacity-100"
-      >
-        デバッグ: ゲームクリア
-      </button>
+      <div class="flex flex-col gap-2">
+        <button
+          @click="
+            () => {
+              gameState.level = 9;
+              gameState.score.player = 45;
+              gameState.status = 'gameCleared';
+              handleCardSelect(correctCardId || '');
+            }
+          "
+          class="px-4 py-2 bg-gray-800 text-white rounded-lg opacity-50 hover:opacity-100"
+        >
+          デバッグ: ゲームクリア
+        </button>
+        <button
+          @click="
+            () => {
+              gameState.score.computer = 3;
+              gameState.status = 'gameOver';
+            }
+          "
+          class="px-4 py-2 bg-gray-800 text-white rounded-lg opacity-50 hover:opacity-100"
+        >
+          デバッグ: ゲームオーバー
+        </button>
+      </div>
     </div>
 
     <div class="flex gap-8">

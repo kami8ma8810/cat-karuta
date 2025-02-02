@@ -26,7 +26,12 @@
     "next": "次の問題へ",
     "loading": "データを読み込み中...",
     "error": "データの読み込みに失敗しました",
-    "backToHome": "トップに戻る"
+    "backToHome": "トップに戻る",
+    "gameOver": {
+      "title": "ゲームオーバー",
+      "restart": "もう一度挑戦する",
+      "back": "トップに戻る"
+    }
   },
   "rules": {
     "title": "遊び方",

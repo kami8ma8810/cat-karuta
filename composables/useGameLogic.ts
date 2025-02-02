@@ -6,12 +6,13 @@ import type { CatBreedWithImage } from '@/types/cat'
 import { selectRandom } from '@/utils/randomSelect'
 import { useCatData } from '@/composables/useCatData'
 import type { RevealType } from '@/types/game'
-
+import { useI18n } from 'vue-i18n'
 export const useGameLogic = () => {
   // 状態管理
   const { state: gameState, updateScore, updateStatus, updateLevel } = useGameState()
   const { catData } = useCatData()
   const router = useRouter()
+  const { t } = useI18n()
 
   const allCat = computed(() => catData.value)
   const usedCatIds = ref<Set<string>>(new Set())
@@ -145,7 +146,7 @@ export const useGameLogic = () => {
 
   // ゲームを中断してホームに戻る
   const handleBack = () => {
-    const answer = window.confirm('ゲームを中断します。保存されませんがよろしいですか？')
+    const answer = window.confirm(t('game.confirmBack'))
     if (answer) {
       correctCatIds.value.clear()
       router.push('/')
