@@ -2,7 +2,7 @@
 import backgroundImage from 'assets/image/fv_illust.png'
 import { useI18n } from 'vue-i18n'
 import { useCatData } from '@/composables/useCatData'
-import GameRules from '@/components/GameRules.vue'
+import GameRulesModal from '@/components/GameRulesModal.vue'
 // import { useRequestURL } from '#app'
 
 const { t, locale } = useI18n()
@@ -39,14 +39,19 @@ const showRules = ref(false)
 
 <template>
   <div class="min-h-screen bg-gradient-to-b from-pink-50 to-green-50 flex flex-col items-center justify-center p-4 relative">
-    <!-- ルール説明モーダル -->
-    <div
-      v-if="showRules"
-      class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
-      @click.self="showRules = false"
-    >
-      <GameRules @close="showRules = false" />
+    <!-- ローディング表示 -->
+    <div v-if="isLoading" class="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
+      <div class="text-center">
+        <div class="animate-spin rounded-full h-12 w-12 border-4 border-pink-500 border-t-transparent mx-auto mb-4"></div>
+        <p class="text-pink-800 text-lg font-bold">{{ t('home.loading') }}</p>
+      </div>
     </div>
+
+    <!-- ルール説明モーダル -->
+    <GameRulesModal
+      :show="showRules"
+      @close="showRules = false"
+    />
 
     <div class="absolute inset-0 opacity-15 pointer-events-none">
       <div 
@@ -57,7 +62,7 @@ const showRules = ref(false)
     </div>
 
     <div class="relative z-10 text-center">
-      <h1 class="text-4xl font-bold text-pink-800 mb-8 tracking-widest">{{ t('home.title') }}</h1>
+      <h1 class="text-3xl sm:text-4xl font-bold text-pink-800 mb-8 tracking-widest">{{ t('home.title') }}</h1>
       
       <div class="space-y-4">
         <NuxtLink
