@@ -21,7 +21,7 @@
       :alt="name"
       @load="isLoading = false"
       class="w-full h-full object-cover rounded-lg shadow-md"
-      :class="imagePositionClass"
+      :style="{ objectPosition: imagePositionClass }"
     />
 
     <!-- 猫種名表示オーバーレイ -->
@@ -62,6 +62,7 @@
 
 <script setup lang="ts">
 import { catBreed } from '@/assets/data/catBreed'
+import { imagePositions } from '@/assets/data/imagePositions'
 
 interface Props {
   imageUrl: string | null;
@@ -90,7 +91,7 @@ const showBreedName = computed(() => {
 
 const imagePositionClass = computed(() => {
   const breed = Object.values(catBreed).find(b => b.nameJa === props.name)
-  return breed?.imagePosition || 'object-center'
+  return breed ? imagePositions[breed.id] || 'center' : 'center'
 })
 
 const emit = defineEmits<{

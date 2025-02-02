@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useCatData } from '@/composables/useCatData'
 import { useI18n } from 'vue-i18n'
+import { imagePositions } from '@/assets/data/imagePositions'
 
 const { t } = useI18n()
 const { catData, fetchData, isLoading, error } = useCatData()
@@ -56,7 +57,7 @@ const sortedCats = computed(() => {
           :src="cat.imageUrl || ''"
           :alt="cat.nameJa"
           class="w-full aspect-square object-cover"
-          :class="cat.id === 'beng' ? 'object-right' : 'object-left'"
+          :style="{ objectPosition: imagePositions[cat.id] ? `${imagePositions[cat.id]}` : 'center' }"
         />
         <div class="p-4">
           <h2 class="text-lg font-bold text-pink-800">{{ cat.nameJa }}</h2>
