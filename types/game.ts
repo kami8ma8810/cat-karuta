@@ -1,4 +1,4 @@
-export type GameStatus = 'waiting' | 'reading' | 'answering' | 'selecting' | 'showResult' | 'waitingNext' | 'gameCleared'
+export type GameStatus = 'waiting' | 'reading' | 'answering' | 'selecting' | 'showResult' | 'waitingNext' | 'gameCleared' | 'gameOver'
 
 // 正解表示の種類
 export type RevealType = 'mistake' | 'timeup' | null

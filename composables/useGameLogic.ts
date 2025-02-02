@@ -116,15 +116,7 @@ export const useGameLogic = () => {
 
     // ゲームオーバーチェック
     if (gameState.value.score.computer >= 3) {
-      // 2秒後にゲームをリセット
-      setTimeout(() => {
-        gameState.value.score.player = 0
-        gameState.value.score.computer = 0
-        gameState.value.level = 1
-        usedCatIds.value.clear()
-        correctCatIds.value.clear()
-        prepareNewRound()
-      }, 2000)
+      updateStatus('gameOver')
       return
     }
 

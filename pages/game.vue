@@ -3,6 +3,7 @@ import { useGameLogic } from "@/composables/useGameLogic";
 import { useI18n } from "vue-i18n";
 import { useCatData } from "@/composables/useCatData";
 import MasterAchievement from "@/components/MasterAchievement.vue";
+import GameOver from '@/components/GameOver.vue'
 // import { useRuntimeConfig } from 'nuxt'
 // import { useRouter } from 'vue-router'
 
@@ -183,6 +184,13 @@ onBeforeRouteUpdate(() => {
     <!-- マスター達成モーダル -->
     <MasterAchievement
       v-if="gameState.status === 'gameCleared'"
+      @restart="handleRestart"
+      @back="handleBack"
+    />
+
+    <!-- ゲームオーバーモーダル -->
+    <GameOver
+      v-if="gameState.status === 'gameOver'"
       @restart="handleRestart"
       @back="handleBack"
     />
