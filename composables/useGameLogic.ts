@@ -57,7 +57,7 @@ export const useGameLogic = () => {
     const fullMessage = `${currentCat.value?.description}\n\nこの猫は「${currentCat.value?.nameJa}」です。`
     currentMessage.value = fullMessage
     // ゲームオーバーチェック
-    if (gameState.value.score.computer >= 3) {
+    if (gameState.value.score.computer >= 5) {
       updateStatus('gameOver')
       return
     }
@@ -137,7 +137,7 @@ export const useGameLogic = () => {
     }
 
     // ゲームオーバーチェック
-    if (gameState.value.score.computer >= 3) {
+    if (gameState.value.score.computer >= 5) {
       updateStatus('gameOver')
       return
     }
