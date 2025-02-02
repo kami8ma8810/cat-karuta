@@ -27,14 +27,15 @@ export default defineNuxtConfig({
     ],
     defaultLocale: 'ja',
     strategy: 'no_prefix',
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'i18n_redirected',
-      redirectOn: 'root',
-      alwaysRedirect: true,
-      fallbackLocale: 'ja',
-      cookieSecure: true,
-    },
+    // detectBrowserLanguage: {
+    //   useCookie: true,
+    //   cookieKey: 'i18n_redirected',
+    //   redirectOn: 'root',
+    //   alwaysRedirect: true,
+    //   fallbackLocale: 'ja',
+    //   cookieSecure: true,
+    // },
+    detectBrowserLanguage: false,
     vueI18n: './i18n/i18n.config.ts'
   },
   app: {
