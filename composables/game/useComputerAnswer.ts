@@ -46,8 +46,8 @@ export const useComputerAnswer = ({
     if (interruptTime) {
       interruptTimerId = setTimeout(() => {
         if (gameState.value.status === 'selecting') {
-          // レベル3以下では途中回答でのみコンピュータの得点とする
-          if (level > 3) {
+          // レベル5以上ではお手つき・時間切れでコンピュータの得点とする
+          if (level >= 5) {
             updateScore('computer')
           }
           updateStatus('showResult')
@@ -64,8 +64,9 @@ export const useComputerAnswer = ({
         if (level > 4) {
           updateScore('computer')
         }
-        updateStatus('showResult')
+        // 正解のカードを表示
         onAnswerCallback?.()
+        updateStatus('showResult')
       }
     }, readingTime + maxWaitTime + answerTime)
   }

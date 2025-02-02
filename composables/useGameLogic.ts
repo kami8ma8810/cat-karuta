@@ -43,19 +43,16 @@ export const useGameLogic = () => {
 
   // コンピュータの回答時の処理
   onComputerAnswer(() => {
-    // 正解のカードを表示
-    correctCardId.value = currentCat.value?.id || null
-    revealedCardId.value = currentCat.value?.id || null
     revealType.value = 'timeup'
+    correctCardId.value = currentCat.value?.id || null
+    revealedCardId.value = null // 時間切れの場合は選択されたカードなし
+    
     // レベル5以上で時間切れの場合は相手にポイント
     if (gameState.value.level >= 5) {
       updateScore('computer')
     }
-    // お手つき後と同様に待機状態に移行
-    updateStatus('showResult')
-    setTimeout(() => {
-      updateStatus('waitingNext')
-    }, 500) // 1.5秒後に次へ進むボタンを表示
+    // 時間切れ結果表示
+    updateStatus('timeupResult')
   })
 
   // テキストのタイピングアニメーション
@@ -122,9 +119,14 @@ export const useGameLogic = () => {
     // 時間切れでない場合のみ正解として扱う
     if (isCorrect && currentCat.value && gameState.value.status !== 'showResult') {
       correctCatIds.value.add(currentCat.value.id)
-    } else if (!isCorrect && gameState.value.level >= 5) {
-      // レベル5以上でお手つきの場合は相手にポイント
-      updateScore('computer')
+      updateStatus('waitingNext')
+    } else {
+      if (!isCorrect && gameState.value.level >= 5) {
+        // レベル5以上でお手つきの場合は相手にポイント
+        updateScore('computer')
+      }
+      // お手つき結果表示
+      updateStatus('mistakeResult')
     }
 
     // ゲームオーバーチェック
@@ -141,13 +143,12 @@ export const useGameLogic = () => {
     // 説明文全体を表示
     const fullMessage = `${currentCat.value?.description}\n\nこの猫は「${currentCat.value?.nameJa}」です。`
     currentMessage.value = fullMessage
-    
-    // お手つき後の待機状態に移行
-    updateStatus('waitingNext')
   }
 
   // 次のラウンドへ進む
   const handleNext = async () => {
+    // 状態をリセット
+    updateStatus('waiting')
     // プレイヤーが正解していた場合、レベルを1上げる
     if (gameState.value.status === 'waitingNext' && 
         correctCardId.value === revealedCardId.value && 
@@ -168,6 +169,7 @@ export const useGameLogic = () => {
   const handleBack = () => {
     const answer = window.confirm(t('game.confirmBack'))
     if (answer) {
+      updateStatus('waiting')
       correctCatIds.value.clear()
       router.push('/')
     }
@@ -175,6 +177,7 @@ export const useGameLogic = () => {
 
   // ゲームをリスタート
   const handleRestart = () => {
+    updateStatus('waiting')
     gameState.value.score.player = 0
     gameState.value.score.computer = 0
     gameState.value.level = 1

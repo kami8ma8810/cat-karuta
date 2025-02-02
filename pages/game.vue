@@ -155,7 +155,7 @@ onBeforeRouteUpdate(() => {
           </div>
           <!-- 次へ進む・リトライ ボタン -->
           <button
-            v-if="gameState.status === 'waitingNext'"
+            v-if="['waitingNext', 'timeupResult', 'mistakeResult'].includes(gameState.status)"
             @click="handleNext"
             class="mt-4 w-full px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
           >
@@ -194,31 +194,32 @@ onBeforeRouteUpdate(() => {
             class="bg-white backdrop-blur-sm rounded-lg pt-10 px-4 pb-4 border-2 relative"
           >
             <!-- ステータス表示 -->
+             <p>{{ gameState.status }}</p>
             <div
-            v-if="gameState.status !== 'waitingNext'"
-            class="absolute top-0 left-0 p-2 rounded text-sm font-bold"
-            :class="{
-              'bg-yellow-100 text-yellow-800': gameState.status === 'selecting',
-              'bg-red-100 text-red-800':
-                gameState.status === 'showResult' && revealType === 'timeup',
-              'bg-pink-100 text-pink-800':
-                gameState.status === 'showResult' && revealType === 'mistake',
-            }"
-          >
-            {{
-              gameState.status === "selecting"
-                ? t("game.status.selecting")
-                : gameState.status === "showResult" && revealType === "timeup"
-                ? gameState.level >= 5
-                  ? t("game.status.timeupWithPoint")
-                  : t("game.status.timeup")
-                : gameState.status === "showResult" && revealType === "mistake"
-                ? gameState.level >= 5
-                  ? t("game.status.mistakeWithPoint")
-                  : t("game.status.mistake")
-                : ""
-            }}
-          </div>
+              v-if="gameState.status === 'selecting' || gameState.status === 'timeupResult' || gameState.status === 'mistakeResult'"
+              class="absolute top-0 left-0 p-2 rounded text-sm font-bold"
+              :class="{
+                'bg-yellow-100 text-yellow-800': gameState.status === 'selecting',
+                'bg-red-100 text-red-800':
+                  gameState.status === 'timeupResult',
+                'bg-pink-100 text-pink-800':
+                  gameState.status === 'mistakeResult',
+              }"
+            >
+              {{
+                gameState.status === "selecting"
+                  ? t("game.status.selecting")
+                  : gameState.status === "timeupResult"
+                  ? gameState.level >= 5
+                    ? t("game.status.timeupWithPoint")
+                    : t("game.status.timeup")
+                  : gameState.status === "mistakeResult"
+                  ? gameState.level >= 5
+                    ? t("game.status.mistakeWithPoint")
+                    : t("game.status.mistake")
+                  : ""
+              }}
+            </div>
             <!-- タイピングテキスト -->
             <p
               class="text-xl min-h-[4rem] relative font-medium"
