@@ -1,4 +1,3 @@
-// tests/game/usePlayerAnswer.test.ts
 import { describe, test, expect, vi, beforeEach } from 'vitest'
 import { ref } from 'vue'
 import { usePlayerAnswer } from '@/composables/game/usePlayerAnswer'

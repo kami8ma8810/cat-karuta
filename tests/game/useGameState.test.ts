@@ -1,4 +1,3 @@
-// tests/composables/game/useGameState.test.ts
 import { describe, test, expect, beforeEach } from 'vitest'
 import { useGameState } from '@/composables/game/useGameState'
 import { COMPUTER_LEVELS } from '@/types/computer'
