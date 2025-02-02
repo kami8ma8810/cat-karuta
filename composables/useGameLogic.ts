@@ -15,6 +15,7 @@ export const useGameLogic = () => {
 
   const allCat = computed(() => catData.value)
   const usedCatIds = ref<Set<string>>(new Set())
+  const correctCatIds = ref<Set<string>>(new Set())
   const displayCat = ref<CatBreedWithImage[]>([])
   const currentCat = ref<CatBreedWithImage | null>(null)
   const currentMessage = ref('')
@@ -72,11 +73,16 @@ export const useGameLogic = () => {
 
   // 新しいラウンドの準備
   const prepareNewRound = () => {
-    if (usedCatIds.value.size === allCat.value.length) {
+    // 正解していない猫から選択
+    const availableCats = allCat.value.filter(cat => !correctCatIds.value.has(cat.id))
+    // 利用可能な猫が6匹未満になったら一時的な使用履歴のみリセット
+    let unusedCats = availableCats.filter(cat => !usedCatIds.value.has(cat.id))
+    if (unusedCats.length < 6) {
       usedCatIds.value.clear()
+      // 正解していない猫から再度選択
+      unusedCats = availableCats
     }
 
-    const unusedCats = allCat.value.filter(cat => !usedCatIds.value.has(cat.id))
     displayCat.value = selectRandom<CatBreedWithImage>(unusedCats, 6)
     currentCat.value = displayCat.value[Math.floor(Math.random() * displayCat.value.length)]
     displayCat.value.forEach(cat => usedCatIds.value.add(cat.id))
@@ -104,14 +110,8 @@ export const useGameLogic = () => {
     revealType.value = 'mistake'
 
     const isCorrect = handleAnswer(selectedCat)
-    if (isCorrect && gameState.value.score.player % 5 === 0) {
-      // レベル10達成時の処理
-      if (gameState.value.level === 9) {
-        updateLevel(10)
-        updateStatus('gameCleared')
-        return
-      }
-      updateLevel(Math.min(gameState.value.level + 1, 10))
+    if (isCorrect && currentCat.value) {
+      correctCatIds.value.add(currentCat.value.id)
     }
 
     // ゲームオーバーチェック
@@ -122,6 +122,7 @@ export const useGameLogic = () => {
         gameState.value.score.computer = 0
         gameState.value.level = 1
         usedCatIds.value.clear()
+        correctCatIds.value.clear()
         prepareNewRound()
       }, 2000)
       return
@@ -154,6 +155,7 @@ export const useGameLogic = () => {
   const handleBack = () => {
     const answer = window.confirm('ゲームを中断します。保存されませんがよろしいですか？')
     if (answer) {
+      correctCatIds.value.clear()
       router.push('/')
     }
   }
@@ -164,6 +166,7 @@ export const useGameLogic = () => {
     gameState.value.score.computer = 0
     gameState.value.level = 1
     usedCatIds.value.clear()
+    correctCatIds.value.clear()
     prepareNewRound()
   }
 
@@ -185,6 +188,8 @@ export const useGameLogic = () => {
     handleCardSelect,
     handleBack,
     handleNext,
-    handleRestart
+    handleRestart,
+    prepareNewRound,
+    correctCatIds
   }
 }
