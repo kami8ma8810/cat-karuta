@@ -1,6 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
+  ssr: true,
+  nitro: {
+    preset: 'vercel'
+  },
   runtimeConfig: {
     cloudinary: {
       cloudName: process.env.CLOUDINARY_CLOUD_NAME,
