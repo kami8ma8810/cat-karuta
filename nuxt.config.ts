@@ -18,8 +18,13 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n', '@nuxt/icon', '@nuxt/test-utils/module'],
   i18n: {
-    locales: ['ja', 'en'],
+    langDir: 'locales',
+    locales: [
+      { code: 'ja', file: 'ja.json' },
+      { code: 'en', file: 'en.json' }
+    ],
     defaultLocale: 'ja',
+    strategy: 'no_prefix',
     vueI18n: './i18n/i18n.config.ts'
   },
   app: {
