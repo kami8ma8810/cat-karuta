@@ -96,14 +96,14 @@ const showRules = ref(false)
         </button>
 
         <!-- SNSシェアボタン -->
-        <a
+        <!-- <a
           :href="`https://twitter.com/intent/tweet?text=${encodeURIComponent(t('home.shareText'))}&url=${encodeURIComponent(baseUrl)}&hashtags=にゃんこ図鑑かるた`"
           target="_blank"
           class="flex items-center justify-center gap-2 px-8 py-4 bg-black text-white rounded-lg hover:opacity-90 transition-opacity text-xl font-bold shadow-lg"
         >
           <Icon name="simple-icons:x" class="w-6 h-6" />
           {{ t('home.share') }}
-        </a>
+        </a> -->
       </div>
     </div>
 
