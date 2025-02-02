@@ -9,6 +9,8 @@
     "rules": "How to Play",
     "loading": "Loading data...",
     "error": "Failed to load data",
+    "share": "Share",
+    "shareText": "A fun card game to learn cat breeds",
     "developer": "Developer: Joo Kalubi"
   },
   "game": {
