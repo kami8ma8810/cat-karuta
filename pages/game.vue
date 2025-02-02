@@ -59,7 +59,7 @@ onBeforeRouteUpdate(() => {
     <!-- ローディング表示 -->
     <div
       v-if="isLoading"
-      class="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50"
+      class="fixed inset-0 bg-white backdrop-blur-sm flex items-center justify-center z-50"
     >
       <div class="text-center">
         <div
@@ -72,7 +72,7 @@ onBeforeRouteUpdate(() => {
     <!-- エラー表示 -->
     <div
       v-if="error"
-      class="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50"
+      class="fixed inset-0 bg-white backdrop-blur-sm flex items-center justify-center z-50"
     >
       <div class="bg-white p-6 rounded-lg shadow-lg max-w-md text-center">
         <p class="text-red-600 mb-4">{{ t("game.error") }}</p>
@@ -120,14 +120,14 @@ onBeforeRouteUpdate(() => {
         <!-- トップに戻るボタン -->
         <button
           @click="handleBack"
-          class="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm text-pink-800 hover:bg-pink-50 rounded-lg transition-colors shadow-md"
+          class="flex items-center gap-2 px-4 py-2 bg-white backdrop-blur-sm text-pink-800 hover:bg-pink-50 rounded-lg transition-colors shadow-md"
         >
           <Icon name="i-heroicons-arrow-left" class="w-6 h-6" />
           <span>{{ t("game.back") }}</span>
         </button>
         <!-- スコアボード -->
         <div
-          class="flex-none bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-md min-w-[200px]"
+          class="flex-none bg-white backdrop-blur-sm p-4 rounded-lg shadow-md min-w-[200px]"
         >
           <div class="mb-4">
             <span class="text-xl font-bold text-pink-800"

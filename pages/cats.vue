@@ -24,16 +24,14 @@ const sortedCats = computed(() => {
   <div class="min-h-screen bg-gradient-to-b from-pink-50 to-green-50 p-8">
     <!-- ヘッダー -->
     <div class="max-w-7xl mx-auto mb-8">
-      <div class="flex justify-between items-center">
-        <h1 class="text-3xl font-bold text-pink-800">{{ t('cats.title') }}</h1>
+        <h1 class="text-3xl font-bold text-pink-800 text-center">{{ t('cats.title') }}</h1>
         <NuxtLink
           to="/"
-          class="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm text-pink-800 hover:bg-pink-50 rounded-lg transition-colors shadow-md"
+          class="fixed top-8 left-8 flex items-center gap-2 px-4 py-2 bg-white backdrop-blur-sm text-pink-800 rounded-lg shadow-md"
         >
           <Icon name="i-heroicons-arrow-left" class="w-6 h-6" />
           <span>{{ t('cats.back') }}</span>
         </NuxtLink>
-      </div>
     </div>
 
     <!-- ローディング表示 -->
