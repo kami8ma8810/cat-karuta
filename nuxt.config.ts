@@ -7,11 +7,9 @@ export default defineNuxtConfig({
       apiKey: process.env.CLOUDINARY_API_KEY,
       apiSecret: process.env.CLOUDINARY_API_SECRET
     },
-    catApiKey: process.env.CAT_API_KEY,
+    catApiKey: process.env.NUXT_CAT_API_KEY,
     public: {
-      cloudinary: {
-        cloudName: process.env.CLOUDINARY_CLOUD_NAME
-      }
+      catApiKey: process.env.NUXT_CAT_API_KEY,
     }
   },
   compatibilityDate: '2024-11-01',
@@ -25,6 +23,13 @@ export default defineNuxtConfig({
     ],
     defaultLocale: 'ja',
     strategy: 'no_prefix',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+      alwaysRedirect: true,
+      fallbackLocale: 'ja'
+    },
     vueI18n: './i18n/i18n.config.ts'
   },
   app: {
