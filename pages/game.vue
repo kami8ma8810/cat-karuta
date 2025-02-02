@@ -10,7 +10,7 @@ const isDev = process.env.NODE_ENV === "development";
 
 const { t } = useI18n();
 // const router = useRouter()
-const { catData, fetchData } = useCatData();
+const { catData, fetchData, isLoading, error } = useCatData();
 const {
   gameState,
   displayCat,
@@ -24,9 +24,6 @@ const {
   handleNext,
   handleRestart,
 } = useGameLogic();
-
-const isSelectable = computed(() => gameState.value.status === "selecting");
-console.log("isSelectable", isSelectable.value);
 
 // ページを離れる前の確認
 // TODO: ブラウザを閉じるときにも出す
@@ -54,14 +51,31 @@ onMounted(async () => {
 onBeforeRouteUpdate(() => {
   window.location.reload();
 });
-
-watch(isSelectable, (newState) => {
-  console.log("isSelectable", newState);
-});
 </script>
 
 <template>
   <div class="min-h-screen bg-gradient-to-b from-pink-50 to-green-50 p-8">
+    <!-- ローディング表示 -->
+    <div v-if="isLoading" class="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
+      <div class="text-center">
+        <div class="animate-spin rounded-full h-12 w-12 border-4 border-pink-500 border-t-transparent mb-4"></div>
+        <p class="text-pink-800">{{ t('game.loading') }}</p>
+      </div>
+    </div>
+
+    <!-- エラー表示 -->
+    <div v-if="error" class="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
+      <div class="bg-white p-6 rounded-lg shadow-lg max-w-md text-center">
+        <p class="text-red-600 mb-4">{{ t('game.error') }}</p>
+        <button
+          @click="handleBack"
+          class="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
+        >
+          {{ t('game.backToHome') }}
+        </button>
+      </div>
+    </div>
+
     <!-- デバッグメニュー（開発環境のみ） -->
     <div v-if="isDev" class="fixed top-8 right-8 z-50">
       <button

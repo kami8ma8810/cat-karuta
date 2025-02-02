@@ -23,7 +23,10 @@
     "waiting": "Waiting...",
     "back": "Back to Top",
     "confirmBack": "Do you want to quit the game and go back?",
-    "next": "Next Question"
+    "next": "Next Question",
+    "loading": "Loading data...",
+    "error": "Failed to load data",
+    "backToHome": "Back to Top"
   },
   "rules": {
     "title": "How to Play",
