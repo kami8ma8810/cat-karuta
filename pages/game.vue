@@ -78,7 +78,7 @@ onBeforeRouteUpdate(() => {
         <p class="text-red-600 mb-4">{{ t("game.error") }}</p>
         <button
           @click="handleBack"
-          class="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
+          class="px-4 py-2 bg-pink-700 hover:bg-pink-800 text-white rounded-lg transition-colors"
         >
           {{ t("game.backToHome") }}
         </button>
@@ -159,7 +159,7 @@ onBeforeRouteUpdate(() => {
                   gameState.status === 'timeupResult' || 
                   gameState.status === 'mistakeResult'"
             @click="handleNext"
-            class="mt-4 w-full px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
+            class="mt-4 w-full px-4 py-2 bg-pink-700 hover:bg-pink-800 text-white rounded-lg transition-colors"
           >
             {{
               gameState.status === 'waitingNext'

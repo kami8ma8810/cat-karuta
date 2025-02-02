@@ -10,7 +10,7 @@
       <div class="space-y-4">
         <button
           @click="$emit('restart')"
-          class="w-full px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
+          class="w-full px-4 py-2 bg-pink-700 text-white rounded-lg hover:bg-pink-800 transition-colors"
         >
           {{ t('game.gameOver.restart') }}
         </button>

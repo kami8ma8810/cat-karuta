@@ -71,7 +71,7 @@ const showRules = ref(false)
           :class="[
             isLoading || error
               ? 'bg-pink-300 cursor-not-allowed text-white'
-              : 'bg-pink-600 text-white hover:bg-pink-700'
+              : 'bg-pink-700 hover:bg-pink-800 text-white transition-colors'
           ]"
           :aria-disabled="isLoading || error"
           @click.prevent="isLoading || error ? null : navigateTo('/game')"
