@@ -9,7 +9,7 @@ import type { RevealType } from '@/types/game'
 import { useI18n } from 'vue-i18n'
 export const useGameLogic = () => {
   // 状態管理
-  const { state: gameState, updateScore, updateStatus, updateLevel } = useGameState()
+  const { state: gameState, updateScore, updateStatus } = useGameState()
   const { catData } = useCatData()
   const router = useRouter()
   const { t } = useI18n()
