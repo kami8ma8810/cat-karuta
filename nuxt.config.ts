@@ -2,9 +2,9 @@
 
 export default defineNuxtConfig({
   ssr: true,
-  nitro: {
-    preset: 'vercel'
-  },
+  // nitro: {
+  //   preset: 'vercel'
+  // },
   runtimeConfig: {
     cloudinary: {
       cloudName: process.env.CLOUDINARY_CLOUD_NAME,
@@ -22,8 +22,8 @@ export default defineNuxtConfig({
   i18n: {
     langDir: 'locales',
     locales: [
-      { code: 'ja', file: 'ja.json' },
-      { code: 'en', file: 'en.json' }
+      { code: 'ja', file: 'ja.json',iso: 'ja-JP' },
+      { code: 'en', file: 'en.json',iso: 'en-US' }
     ],
     defaultLocale: 'ja',
     strategy: 'no_prefix',
@@ -32,7 +32,8 @@ export default defineNuxtConfig({
       cookieKey: 'i18n_redirected',
       redirectOn: 'root',
       alwaysRedirect: true,
-      fallbackLocale: 'ja'
+      fallbackLocale: 'ja',
+      cookieSecure: true,
     },
     vueI18n: './i18n/i18n.config.ts'
   },
