@@ -40,7 +40,7 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: 'にゃんこ図鑑かるた',
+      title: 'にゃんこかるた',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -48,8 +48,8 @@ export default defineNuxtConfig({
         { name: 'description', content: '猫の品種を学べるカルタゲーム' },
         // OGP
         { property: 'og:type', content: 'website' },
-        { property: 'og:site_name', content: 'にゃんこ図鑑かるた' },
-        { property: 'og:title', content: 'にゃんこ図鑑かるた' },
+        { property: 'og:site_name', content: 'にゃんこかるた' },
+        { property: 'og:title', content: 'にゃんこかるた' },
         { property: 'og:description', content: '猫の品種を学べるカルタゲーム' },
         { property: 'og:image', content: 'https://cat-karuta.vercel.app/ogp.jpg' },
         { property: 'og:url', content: 'https://cat-karuta.vercel.app' },

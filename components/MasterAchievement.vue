@@ -12,7 +12,7 @@
       <!-- SNSシェアボタン -->
       <!-- <div class="flex justify-center gap-4 mb-8">
         <a
-          :href="`https://twitter.com/intent/tweet?text=${encodeURIComponent(t('rules.master.shareText'))}&url=${encodeURIComponent(baseUrl)}&hashtags=にゃんこ図鑑かるた`"
+          :href="`https://twitter.com/intent/tweet?text=${encodeURIComponent(t('rules.master.shareText'))}&url=${encodeURIComponent(baseUrl)}&hashtags=にゃんこかるた`"
           target="_blank"
           class="flex items-center gap-2 px-4 py-2 bg-black text-white rounded-lg hover:opacity-90 transition-opacity"
         >
