@@ -51,10 +51,11 @@ export default defineNuxtConfig({
         { property: 'og:site_name', content: 'にゃんこかるた' },
         { property: 'og:title', content: 'にゃんこかるた' },
         { property: 'og:description', content: '猫の品種を学べるカルタゲーム' },
-        { property: 'og:image', content: 'https://cat-karuta.vercel.app/ogp.jpg' },
+        { property: 'og:image', content: 'https://cat-karuta.vercel.app/ogp.png' },
         { property: 'og:url', content: 'https://cat-karuta.vercel.app' },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
+        { property: 'og:image:type', content: 'image/png' },
         // Twitter Card
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:site', content: '@jookalubi24' },
