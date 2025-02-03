@@ -173,7 +173,7 @@ export const catBreed: Record<string, CatBreedTranslation> = {
   },
   'jbob': {
     id: 'jbob',
-    nameJa: '日本ボブテイル',
+    nameJa: 'ジャパニーズボブテイル',
     descriptionJa: '活発で優しく、賢い猫種です。人と一緒にいることを好み、おもちゃを持ってきて遊びを求めます。'
   },
   'java': {
