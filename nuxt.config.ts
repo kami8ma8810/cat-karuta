@@ -40,7 +40,28 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
+      title: 'にゃんこ図鑑かるた',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'format-detection', content: 'telephone=no' },
+        { name: 'description', content: '猫の品種を学べるカルタゲーム' },
+        // OGP
+        { property: 'og:type', content: 'website' },
+        { property: 'og:site_name', content: 'にゃんこ図鑑かるた' },
+        { property: 'og:title', content: 'にゃんこ図鑑かるた' },
+        { property: 'og:description', content: '猫の品種を学べるカルタゲーム' },
+        { property: 'og:image', content: 'https://cat-karuta.vercel.app/ogp.jpg' },
+        { property: 'og:url', content: 'https://cat-karuta.vercel.app' },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
+        // Twitter Card
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:site', content: '@jookalubi24' },
+      ],
       link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'apple-touch-icon', type: 'image/png', href: '/favicon.png' },
         {
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap'

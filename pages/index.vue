@@ -9,13 +9,6 @@ const { t, locale } = useI18n()
 // const baseUrl = useRequestURL().origin
 const { fetchData, isLoading, error } = useCatData()
 
-useHead({
-  title: t('meta.title'),
-  meta: [
-    { name: 'description', content: t('meta.description') }
-  ]
-})
-
 // 言語切り替えメニューの状態管理
 // const isLangMenuOpen = ref(false)
 
