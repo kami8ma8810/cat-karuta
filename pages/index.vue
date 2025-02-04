@@ -118,7 +118,7 @@ const showRules = ref(false)
       >
         {{ t('home.developer') }}
       </a>
-      <p class="mt-4 text-sm text-gray-700">Version 1.1.0</p>
+      <p class="mt-4 text-sm text-gray-700">Version 1.1.1</p>
     </div>
     <!-- <div class="fixed bottom-8 right-8">
       <button

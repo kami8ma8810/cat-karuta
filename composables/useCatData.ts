@@ -5,8 +5,8 @@ export const useCatData = () => {
   const { fetchCatsWithImage } = useCatApi()
   
   // キャッシュキー
-  const CACHE_KEY = 'cat-karuta-data-v110'
-  const CACHE_EXPIRY_KEY = 'cat-karuta-data-expiry-v110'
+  const CACHE_KEY = 'cat-karuta-data-v111'
+  const CACHE_EXPIRY_KEY = 'cat-karuta-data-expiry-v111'
   const CACHE_DURATION = 7 * 24 * 60 * 60 * 1000 // 1週間
   
   // 猫データのキャッシュ
