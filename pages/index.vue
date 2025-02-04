@@ -109,7 +109,7 @@ const showRules = ref(false)
     <div v-if="error" class="mt-8 text-red-700 font-bold text-2xl">
       <p>{{ t('home.error') }}</p>
     </div>
-<!-- 
+
     <div class="fixed bottom-8 text-center">
       <a 
         href="https://twitter.com/jookalubi24" 
@@ -118,7 +118,8 @@ const showRules = ref(false)
       >
         {{ t('home.developer') }}
       </a>
-    </div> -->
+      <p class="mt-4 text-sm text-gray-700">Version 1.1.0</p>
+    </div>
     <!-- <div class="fixed bottom-8 right-8">
       <button
         @click="isLangMenuOpen = !isLangMenuOpen"
