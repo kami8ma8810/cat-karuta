@@ -7,7 +7,7 @@ export const useCatData = () => {
   // キャッシュキー
   const CACHE_KEY = 'cat-karuta-data'
   const CACHE_EXPIRY_KEY = 'cat-karuta-data-expiry'
-  const CACHE_DURATION = 24 * 60 * 60 * 1000 // 24時間
+  const CACHE_DURATION = 7 * 24 * 60 * 60 * 1000 // 1週間
   
   // 猫データのキャッシュ
   const catData = useState<CatBreedWithImage[]>(CACHE_KEY, () => [])
