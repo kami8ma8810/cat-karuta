@@ -4,7 +4,7 @@ export const catBreed: Record<string, CatBreedTranslation> = {
   'abys': {
     id: 'abys',
     nameJa: 'アビシニアン',
-    descriptionJa: '毛の模様はティックトタビーと呼ばれ、毛の一本一本に縞模様が入っています。「イギリス兵がアビシニア高原（エチオピア）から連れ帰った珍しい猫」と紹介されたことに由来します。'
+    descriptionJa: '毛の一本一本に縞模様が入っています。「イギリス兵がアビシニア高原（エチオピア）から連れ帰った珍しい猫」と紹介されたことに由来します。'
   },
   'aege': {
     id: 'aege', 
@@ -14,7 +14,7 @@ export const catBreed: Record<string, CatBreedTranslation> = {
   'abob': {
     id: 'abob',
     nameJa: 'アメリカンボブテイル',
-    descriptionJa: '特徴はなんといってもその短いしっぽです。アメリカでは動物介在療法（アニマル・セラピー）に参加することもあり、「猫界のゴールデンレトリーバー」と呼ばれることもあるほど温和です。'
+    descriptionJa: '短いしっぽが特徴。アメリカではアニマル・セラピーに参加することもあり、「猫界のゴールデンレトリーバー」と呼ばれることもあるほど温和です。'
   },
   'acur': {
     id: 'acur',
@@ -69,12 +69,12 @@ export const catBreed: Record<string, CatBreedTranslation> = {
   'bslo': {
     id: 'bslo',
     nameJa: 'ブリティッシュロングヘア',
-    descriptionJa: 'イングランド原産の猫種で、ブリティッシュショートヘアを長毛種に改良して生まれた猫です。筋肉質で、頭やひげパッド、目が丸く、鼻が短めな体つきをしています。'
+    descriptionJa: 'イングランド原産の猫種。ブリティッシュショートヘアを長毛種に改良して生まれた猫です。'
   },
   'bsho': {
     id: 'bsho',
     nameJa: 'ブリティッシュショートヘア',
-    descriptionJa: '「短毛」を意味する「ショートヘア」という名の通り短毛種であり、骨太の脚、厚く幅の広い胸部、引き締まった胴体、重量感のある丸い顔が特徴的です。元々は「ブリティッシュブルー」と呼ばれていました。'
+    descriptionJa: '短毛種であり、骨太の脚、引き締まった胴体、重量感のある丸い顔が特徴的。元々は「ブリティッシュブルー」と呼ばれていました。'
   },
   'bure': {
     id: 'bure',
@@ -89,7 +89,7 @@ export const catBreed: Record<string, CatBreedTranslation> = {
   'cspa': {
     id: 'cspa',
     nameJa: 'カリフォルニアスパングルド',
-    descriptionJa: '長くて細身な胴体と小型レパードを思わせる斑点模様（スパングル）が特徴です。野生的な外見とは裏腹に遊び好きで人懐こく、愛情深くて社交的といわれます。'
+    descriptionJa: '長くて細身な胴体と小型レパードを思わせる斑点模様が特徴です。野生的な外見とは裏腹に遊び好きで人懐こく、愛情深くて社交的といわれます。'
   },
   'ctif': {
     id: 'ctif',
@@ -114,17 +114,17 @@ export const catBreed: Record<string, CatBreedTranslation> = {
   'csho': {
     id: 'csho',
     nameJa: 'カラーポイントショートヘア',
-    descriptionJa: 'シャムとアメリカンショートヘアーなどの交配によって生み出された品種です。声の大きさはシャム譲りで、常に注目の中心にいたがる傾向があります。'
+    descriptionJa: 'シャムとアメリカンショートヘアーなどの交配によって生み出された品種。声の大きさはシャム譲りで、常に注目の中心にいたがる傾向があります。'
   },
   'crex': {
     id: 'crex',
     nameJa: 'コーニッシュレックス',
-    descriptionJa: 'シングルコートの巻き毛が特徴の、オリエンタルタイプでやや小さ目の猫です。スリムな体型に小さめのたまご型の頭が特徴です。無駄のない筋肉がついており、素晴らしいジャンプ力を見せます。'
+    descriptionJa: 'シングルコートの巻き毛が特徴のやや小さ目の猫です。無駄のない筋肉がついており、素晴らしいジャンプ力を見せます。'
   },
   'cymr': {
     id: 'cymr',
     nameJa: 'キムリック',
-    descriptionJa: 'カナダ原産でマンクスに長毛種をかけ合わせてできた猫です。前肢より後肢の方が長く、ウサギがピョンピョン跳ねるように動くのと、モコモコしたぬいぐるみのような毛が特徴です。'
+    descriptionJa: 'カナダ原産でマンクスに長毛種をかけ合わせてできた猫です。前肢より後肢の方が長く、モコモコしたぬいぐるみのような毛が特徴です。'
   },
   'cypr': {
     id: 'cypr',
@@ -164,12 +164,12 @@ export const catBreed: Record<string, CatBreedTranslation> = {
   'hbro': {
     id: 'hbro',
     nameJa: 'ハバナブラウン',
-    descriptionJa: 'チョコレートポイントのシャム猫と、シャムの血を持つ黒猫を交配したことが起源だとされています。まるでハバナ産の葉巻に似ていることから名づけられたといわれています。'
+    descriptionJa: 'チョコレートポイントのシャム猫と、シャムの血を持つ黒猫を交配された猫種。名前の由来はハバナ産の葉巻に似ているからと言われています。'
   },
   'hima': {
     id: 'hima',
     nameJa: 'ヒマラヤン',
-    descriptionJa: 'ペルシャ猫とシャム猫を掛け合わせて作られた猫種で、長毛のダブルコートとポイントカラーが特徴です。色模様が、ヒマラヤウサギに似ているので、ヒマラヤンと名付けられたとされます。'
+    descriptionJa: 'ペルシャ猫とシャム猫を掛け合わせて作られた猫種。色模様が、ヒマラヤウサギに似ていることから名付けられたとされます。'
   },
   'jbob': {
     id: 'jbob',
@@ -199,7 +199,7 @@ export const catBreed: Record<string, CatBreedTranslation> = {
   'lape': {
     id: 'lape',
     nameJa: 'ラパーマ',
-    descriptionJa: 'なんといっても、まつ毛や尻尾、ヒゲなどまで全身を覆う縮れた毛が特徴です。実はとっても筋肉質で骨格もしっかりしており、厚い胸板と力強い四肢を持っています。'
+    descriptionJa: 'まつ毛や尻尾、ヒゲなどまで全身を覆う縮れた毛が特徴。筋肉質で骨格もしっかりしており、厚い胸板と力強い四肢を持っています。'
   },
   'mcoo': {
     id: 'mcoo',
@@ -279,7 +279,7 @@ export const catBreed: Record<string, CatBreedTranslation> = {
   'siam': {
     id: 'siam',
     nameJa: 'シャム',
-    descriptionJa: '王室や貴族、寺院など、高貴な血筋の家系でのみ飼うことが許されるなど、尊い扱いをうけてきました。ポインテッドと呼ばれる鼻先や足先だけに色がある毛柄が特徴です。'
+    descriptionJa: '王室などの家系でのみ飼うことが許されるなど、尊い扱いをうけてきました。ポインテッドと呼ばれる鼻先や足先だけに色がある毛柄が特徴。'
   },
   'sibe': {
     id: 'sibe',
@@ -309,7 +309,7 @@ export const catBreed: Record<string, CatBreedTranslation> = {
   'tonk': {
     id: 'tonk',
     nameJa: 'トンキニーズ',
-    descriptionJa: 'シャムとバーミーズを交配させて生まれた品種です。筋肉質な体と素晴らしい毛の手触りから、抱き上げた時に「ミンクのコートを抱えたようだ」と形容されることがしばしばあります。'
+    descriptionJa: 'シャムとバーミーズを交配させて生まれた品種。筋肉質な体と毛の手触りから、抱き上げた時に「ミンクのコートを抱えたようだ」と形容されます。'
   },
   'toyg': {
     id: 'toyg',
