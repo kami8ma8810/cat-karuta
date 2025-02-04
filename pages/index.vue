@@ -3,10 +3,11 @@ import backgroundImage from 'assets/image/fv_illust.png'
 import { useI18n } from 'vue-i18n'
 import { useCatData } from '@/composables/useCatData'
 import GameRulesModal from '@/components/GameRulesModal.vue'
-// import { useRequestURL } from '#app'
+import ReleaseReportModal from '@/components/ReleaseReportModal.vue'
+import { useRequestURL } from '#app'
 
 const { t, locale } = useI18n()
-// const baseUrl = useRequestURL().origin
+const baseUrl = useRequestURL().origin
 const { fetchData, isLoading, error } = useCatData()
 
 // 言語切り替えメニューの状態管理
@@ -28,6 +29,7 @@ onMounted(async () => {
 })
 
 const showRules = ref(false)
+const showReport = ref(false)
 </script>
 
 <template>
@@ -94,14 +96,21 @@ const showRules = ref(false)
         </button>
 
         <!-- SNSシェアボタン -->
-        <!-- <a
+        <a
           :href="`https://twitter.com/intent/tweet?text=${encodeURIComponent(t('home.shareText'))}&url=${encodeURIComponent(baseUrl)}&hashtags=にゃんこかるた`"
           target="_blank"
           class="flex items-center justify-center gap-2 px-8 py-4 bg-black text-white rounded-lg hover:opacity-90 transition-opacity text-xl font-bold shadow-lg"
         >
           <Icon name="simple-icons:x" class="w-6 h-6" />
           {{ t('home.share') }}
-        </a> -->
+        </a>
+
+        <button
+          class="block w-full p-2 text-pink-800 rounded-lg text-xl underline"
+          @click="showReport = true"
+        >
+          {{ t('home.report') }}
+        </button>
       </div>
     </div>
 
@@ -118,7 +127,7 @@ const showRules = ref(false)
       >
         {{ t('home.developer') }}
       </a>
-      <p class="mt-4 text-sm text-gray-700">Version 1.1.1</p>
+      <p class="mt-4 text-sm text-gray-700">Version 1.1.2</p>
     </div>
     <!-- <div class="fixed bottom-8 right-8">
       <button
@@ -155,5 +164,7 @@ const showRules = ref(false)
         </button>
       </div>
     </div> -->
+
+    <ReleaseReportModal :show="showReport" @close="showReport = false" />
   </div>
 </template>
