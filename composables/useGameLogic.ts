@@ -162,7 +162,6 @@ export const useGameLogic = () => {
     // 画面最上部へスクロール位置をリセット（スマホ用）
     window.scrollTo(0, 0)
     if (gameState.value.status === 'waitingNext') {
-
       // レベルを更新（最大10まで）
       gameState.value.level = Math.min(gameState.value.level + 1, 10)
       await prepareNewRound()
