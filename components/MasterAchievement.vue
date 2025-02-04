@@ -23,9 +23,7 @@
       <div class="flex flex-col gap-4">
         <!-- SNSシェアボタン -->
         <a
-          :href="`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-            t('rules.master.shareText')
-          )}&url=${encodeURIComponent(baseUrl)}&hashtags=にゃんこかるた`"
+          :href="twitterShareUrl"
           target="_blank"
           class="flex items-center gap-2 px-4 py-2 bg-black text-white rounded-lg hover:opacity-90 transition-opacity w-full justify-center"
         >
@@ -57,6 +55,7 @@ import { useRequestURL } from "#app";
 
 const { t } = useI18n();
 const baseUrl = useRequestURL().origin;
+const nuxtApp = useNuxtApp();
 
 // クリア時のOGP画像を設定
 useServerSeoMeta({
@@ -70,4 +69,25 @@ defineEmits<{
   (e: "restart"): void;
   (e: "back"): void;
 }>();
+
+const ogImageUrl = computed(() => {
+  return process.env.NODE_ENV === "production"
+    ? "https://cat-karuta.vercel.app/ogp-clear.png"
+    : `${baseUrl}/ogp-clear.png`;
+});
+
+const twitterShareUrl = computed(() => {
+  const text = t('rules.master.shareText');
+  const hashtags = 'にゃんこかるた';
+  
+  return `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(baseUrl)}&hashtags=${encodeURIComponent(hashtags)}`;
+});
+
+onMounted(() => {
+  nuxtApp.$updateOgImage(ogImageUrl.value);
+});
+
+useServerSeoMeta({
+  ogImage: ogImageUrl.value,
+});
 </script>
