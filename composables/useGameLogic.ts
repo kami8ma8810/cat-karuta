@@ -53,9 +53,10 @@ export const useGameLogic = () => {
     }
     // 時間切れ結果表示
     updateStatus('timeupResult')
-    // 説明文全体を表示
-    const fullMessage = `${currentCat.value?.description}\n\nこの猫は「${currentCat.value?.nameJa}」です。`
-    currentMessage.value = fullMessage
+    // 問題文を完全な状態に更新
+    if (currentCat.value) {
+      currentMessage.value = `${currentCat.value.description}\n\n${t('game.catName', { name: currentCat.value.nameJa })}`
+    }
     // ゲームオーバーチェック
     if (gameState.value.score.computer >= 5) {
       updateStatus('gameOver')
