@@ -61,8 +61,8 @@ const nuxtApp = useNuxtApp();
 useServerSeoMeta({
   ogImage:
     process.env.NODE_ENV === "production"
-      ? "https://cat-karuta.vercel.app/ogp-clear.png"
-      : "/ogp-clear.png",
+      ? "https://cat-karuta.vercel.app/ogp-clear.jpg"
+      : "/ogp-clear.jpg",
 });
 
 defineEmits<{
@@ -72,8 +72,8 @@ defineEmits<{
 
 const ogImageUrl = computed(() => {
   return process.env.NODE_ENV === "production"
-    ? "https://cat-karuta.vercel.app/ogp-clear.png"
-    : `${baseUrl}/ogp-clear.png`;
+    ? "https://cat-karuta.vercel.app/ogp-clear.jpg"
+    : `${baseUrl}/ogp-clear.jpg`;
 });
 
 const twitterShareUrl = computed(() => {
@@ -85,9 +85,5 @@ const twitterShareUrl = computed(() => {
 
 onMounted(() => {
   nuxtApp.$updateOgImage(ogImageUrl.value);
-});
-
-useServerSeoMeta({
-  ogImage: ogImageUrl.value,
 });
 </script>
