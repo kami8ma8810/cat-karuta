@@ -10,7 +10,7 @@
       <p class="text-gray-700 whitespace-pre-line mb-8">{{ t('rules.master.message') }}</p>
 
       <!-- SNSシェアボタン -->
-      <!-- <div class="flex justify-center gap-4 mb-8">
+      <div class="flex justify-center gap-4 mb-8">
         <a
           :href="`https://twitter.com/intent/tweet?text=${encodeURIComponent(t('rules.master.shareText'))}&url=${encodeURIComponent(baseUrl)}&hashtags=にゃんこかるた`"
           target="_blank"
@@ -19,7 +19,7 @@
           <Icon name="simple-icons:x" class="w-5 h-5" />
           {{ t('rules.master.share') }}
         </a>
-      </div> -->
+      </div>
 
       <div class="space-y-4">
         <button

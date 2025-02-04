@@ -45,14 +45,21 @@ export default defineNuxtConfig({
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'format-detection', content: 'telephone=no' },
-        { name: 'description', content: '猫の品種を学べるカルタゲーム' },
+        { name: 'description', content: '猫の品種を楽しく学べるカルタゲーム' },
         // OGP
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: 'にゃんこかるた' },
         { property: 'og:title', content: 'にゃんこかるた' },
-        { property: 'og:description', content: '猫の品種を学べるカルタゲーム' },
-        { property: 'og:image', content: 'https://cat-karuta.vercel.app/ogp.png' },
-        { property: 'og:url', content: 'https://cat-karuta.vercel.app' },
+        { property: 'og:description', content: '猫の品種を楽しく学べるカルタゲーム' },
+        { property: 'og:image', content: process.env.NODE_ENV === 'production' 
+          ? 'https://cat-karuta.vercel.app/ogp.png' 
+          : '/ogp.png' 
+        },
+        { property: 'og:image:alt', content: 'にゃんこかるたクリア！' },
+        { property: 'og:url', content: process.env.NODE_ENV === 'production'
+          ? 'https://cat-karuta.vercel.app'
+          : 'http://localhost:3000'
+        },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
         { property: 'og:image:type', content: 'image/png' },

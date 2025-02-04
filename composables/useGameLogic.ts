@@ -126,7 +126,12 @@ export const useGameLogic = () => {
     const isCorrect = handleAnswer(selectedCat)
     if (isCorrect && currentCat.value) {
       correctCatIds.value.add(currentCat.value.id)
-      updateStatus('waitingNext')
+      // レベル10でクリア
+      if (gameState.value.level === 3) {
+        updateStatus('gameCleared')
+      } else {
+        updateStatus('waitingNext')
+      }
     } else {
       if (!isCorrect && gameState.value.level >= 5) {
         // レベル5以上でお手つきの場合は相手にポイント
@@ -157,6 +162,7 @@ export const useGameLogic = () => {
     // 画面最上部へスクロール位置をリセット（スマホ用）
     window.scrollTo(0, 0)
     if (gameState.value.status === 'waitingNext') {
+
       // レベルを更新（最大10まで）
       gameState.value.level = Math.min(gameState.value.level + 1, 10)
       await prepareNewRound()

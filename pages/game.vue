@@ -207,11 +207,11 @@ onBeforeRouteUpdate(() => {
             v-if="(gameState.status === 'waitingNext' || 
                   gameState.status === 'timeupResult' || 
                   gameState.status === 'mistakeResult')"
-            class="md:hidden flex justify-center z-50"
+            class="flex justify-center z-50 w-full mb-4"
           >
             <button
               @click="handleNext"
-              class="w-full max-w-md px-4 py-3 bg-pink-700 backdrop-blur-sm hover:bg-pink-800 text-white rounded-lg transition-colors shadow-lg mb-4"
+              class="w-full max-w-md px-4 py-3 bg-pink-700 backdrop-blur-sm hover:bg-pink-800 text-white rounded-lg transition-colors shadow-lg"
             >
               {{
                 gameState.status === 'waitingNext'
