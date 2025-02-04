@@ -149,7 +149,7 @@ export const catBreed: Record<string, CatBreedTranslation> = {
   'emau': {
     id: 'emau',
     nameJa: 'エジプシャンマウ',
-    descriptionJa: '優しく控えめな性格です。飼い主を深く愛する一方で、見知らぬ人には警戒心を示します。'
+    descriptionJa: 'エジプト産のイエネコを元に、欧米で品種改良が行われました。野性的な斑点と古代エジプトの壁画を思わせるアイラインが特徴。'
   },
   'ebur': {
     id: 'ebur',

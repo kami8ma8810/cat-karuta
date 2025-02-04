@@ -127,7 +127,7 @@ export const useGameLogic = () => {
     if (isCorrect && currentCat.value) {
       correctCatIds.value.add(currentCat.value.id)
       // レベル10でクリア
-      if (gameState.value.level === 3) {
+      if (gameState.value.level === 10) {
         updateStatus('gameCleared')
       } else {
         updateStatus('waitingNext')

@@ -55,7 +55,7 @@ export default defineNuxtConfig({
           ? 'https://cat-karuta.vercel.app/ogp.png' 
           : '/ogp.png' 
         },
-        { property: 'og:image:alt', content: 'にゃんこかるたクリア！' },
+        { property: 'og:image:alt', content: 'にゃんこかるた' },
         { property: 'og:url', content: process.env.NODE_ENV === 'production'
           ? 'https://cat-karuta.vercel.app'
           : 'http://localhost:3000'
